@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
+
+//라우터 불러오기
 import router from "./src/routers/index.js";
-import pool from "./src/config/database.js";
-import create from "./src/routers/letter/create.js";
 
 const app = express();
 
@@ -16,8 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json()); 
 
 app.use('/', router);
-app.use('/letter/create',create);
-app.use('/letter/create',create);
+
 
 const PORT = 3000;
 
