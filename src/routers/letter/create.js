@@ -35,6 +35,7 @@ const create = async (req, res) => {
                     res.render('/');
                 }
             })
+            
     } catch (error) {
         console.log("error");
         return res.json(error);
