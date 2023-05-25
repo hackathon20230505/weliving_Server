@@ -5,7 +5,6 @@ import show from "./show.js";
 
 export const router = express.Router();
 
-
 //POST /letter/create
 router.post('/create',create);
 
