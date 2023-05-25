@@ -19,14 +19,11 @@ app.use('/', router);
 
 const SERVER_HOST = 3000;
 
-
 const handleListening =  () => {
     console.log(`✅ Server listenting on http://localhost:${SERVER_HOST} 🚀`);
 
 }
 
 app.listen(SERVER_HOST, handleListening);
-
-
 
 export default app;
