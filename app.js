@@ -17,17 +17,16 @@ app.use(express.json());
 
 app.use('/', router);
 
-
-const PORT = 3000;
+const SERVER_HOST = 3000;
 
 
 const handleListening =  () => {
-    console.log(`✅ Server listenting on http://localhost:${PORT} 🚀`);
+    console.log(`✅ Server listenting on http://localhost:${SERVER_HOST} 🚀`);
 
 }
 
+app.listen(SERVER_HOST, handleListening);
 
-app.listen(PORT, handleListening);
 
 
 export default app;

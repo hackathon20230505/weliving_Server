@@ -43,10 +43,10 @@ export const refresh = () => {
   });
 };
 
-export const refreshVerify = async (token, username) => {
+export const refreshVerify = async (token, email) => {
   const getAsync = promisify(redisClient.get).bind(redisClient);
   try {
-    const data = await getAsync(username);
+    const data = await getAsync(email);
     if (token === data) {
       return {
         ok: true,
