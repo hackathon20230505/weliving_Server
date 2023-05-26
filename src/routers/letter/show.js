@@ -6,8 +6,8 @@ export const show = async (req, res) => {
     const show_query = `SELECT title,content,createdAt FROM Letter WHERE user_id = ? `;
 
     // params
-    const { user_id } = req.body;
-
+    const user_id = req.id;
+    
     // execute & respond
     try {
         const conn = await pool.getConnection();

@@ -9,7 +9,8 @@ export const create = async (req, res) => {
     const create_query = `INSERT INTO hackathon.Letter (title, content, createdAt, isShare, user_id) VALUES (?, ?, ?, ?, ?)`;
 
     // params
-    const { title, content, user_id } = req.body;
+    const { title, content } = req.body;
+    const user_id = req.id;
     const createdAt = formattedTime;
     const isShare = 1; //true
     const params = [title, content, createdAt, isShare, user_id];
@@ -40,7 +41,8 @@ export const tempcreate = async (req, res) => {
     const create_query = `INSERT INTO hackathon.TempLetter (title, content, createdAt, user_id) VALUES (?, ?, ?, ?)`;
 
     // params
-    const { title, content, user_id } = req.body;
+    const { title, content } = req.body;
+    const user_id = req.id;
     const createdAt = formattedTime;
     const params = [title, content, createdAt, user_id];
 

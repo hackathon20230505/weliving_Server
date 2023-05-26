@@ -38,8 +38,8 @@ export const templist = async (req, res) => {
     const templist_query = `SELECT letter_id,title,createdAt FROM TempLetter WHERE user_id = ?`;
 
     // params
-    const { user_id } = req.body; 
-
+    const user_id = req.id;
+    
     // execute & respond
     try {
         const conn = await pool.getConnection();
