@@ -1,7 +1,21 @@
 import redis from "redis";
+import dotenv from 'dotenv';
+dotenv.config();
 
-export const redisClient = redis.createClient(process.env.REDIS_PORT);
+export const redisClient =  await redis.createClient({
+  legacyMode: true,
+  host: 'localhost',
+  port: process.env.REDIS_PORT,
+});
 
+
+await redisClient.on('error', (err) => {
+  console.log(`Redis error: ${err}`);
+    redisClient.quit();
+})
+
+
+redisClient.connect();
 
 
 export const set = (key, value) => {

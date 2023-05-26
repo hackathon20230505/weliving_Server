@@ -7,25 +7,29 @@ import { promisify } from "util";
 
 export const sign = (user) => {
   const payload = {
-    id: user.id,
-    role: user.role,
+    id: user.user_id,
   };
+
+  console.log(payload);
+
 
   return jwt.sign(payload, process.env.JWT_SECRET, {
     algorithm: 'HS256',
-    expiresIn: '5m',
+    expiresIn: '10m',
     issuer: 'well-dying',
   });
 };
 
 export const verify = (token) => {
   let decoded = null;
-  try {
+  
+  try { 
     decoded = jwt.verify(token, process.env.JWT_SECRET);
+
     return {
       ok: true,
       id: decoded.id,
-      role: decoded.role,
+    
     };
   } catch (err) {
     return {
