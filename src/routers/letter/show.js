@@ -1,46 +1,77 @@
 import pool from "../../config/database.js";
 
-//내 유서 보기 (user_id)
+// 내 유서 보기 (req==user_id)
 export const show = async (req, res) => {
     // query
     const show_query = `SELECT title,content,createdAt FROM Letter WHERE user_id = ? `;
 
-    // db
+    // params
     const { user_id } = req.body;
-    const conn = await pool.getConnection();
 
+    // execute & respond
     try {
+        const conn = await pool.getConnection();
         const [data] = await conn.query(show_query, user_id);
 
         return res.status(200).send({
             ok: true,
             data: data
         })
-    } catch (error) {
-        console.log("error" + error);
-        return res.json(error);
+    } catch (err) {
+        res.status(409).send({
+            ok: false,
+            msg: err.message,
+        })
     }
 };
 
-//다른 사람 유서 보기 (letter_id)
+// 다른 사람 유서 보기 (req==letter_id)
 export const othershow = async (req, res) => {
     // query
     const show_query = `SELECT title,content,createdAt FROM Letter 
     WHERE letter_id=?`;
 
-    // db
+    // params
     const { letter_id } = req.body;
-    const conn = await pool.getConnection();
 
+    // execute & respond
     try {
+        const conn = await pool.getConnection();
         const [data] = await conn.query(show_query, letter_id);
 
         return res.status(200).send({
             ok: true,
             data: data
         })
-    } catch (error) {
-        console.log("error" + error);
-        return res.json(error);
+    } catch (err) {
+        res.status(409).send({
+            ok: false,
+            msg: err.message,
+        })
+    }
+};
+
+// 임시저장 유서 보기 (req==user_id)
+export const tempshow = async (req, res) => {
+    // query
+    const tempshow_query = `SELECT title,content,createdAt FROM TempLetter WHERE letter_id = ? `;
+
+    // db
+    const { letter_id } = req.body;
+
+    // execute & respond
+    try {
+        const conn = await pool.getConnection();
+        const [data] = await conn.query(tempshow_query, letter_id);
+
+        return res.status(200).send({
+            ok: true,
+            data: data
+        })
+    } catch (err) {
+        res.status(409).send({
+            ok: false,
+            msg: err.message,
+        })
     }
 };
