@@ -4,7 +4,7 @@ dotenv.config();
 
 export const redisClient =  await redis.createClient({
   legacyMode: true,
-  host: 'localhost',
+  host: process.env.SERVER_HOST,
   port: process.env.REDIS_PORT,
 });
 
