@@ -1,8 +1,11 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import router from "./src/routers/index.js";
 import { swaggerUi, specs } from "./src/swagger/swagger.js";
+import { server } from "./src/utils/http2.js";
 
 const app = express();
 
@@ -21,14 +24,13 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 
 
-const SERVER_HOST = 3000
+const SERVER_HOST = process.env.SERVER_HOST;
+const port = 3000;
 
-const handleListening =  () => {
-    console.log(`✅ Server listenting on http://localhost:${SERVER_HOST} 🚀`);
 
-}
-
-app.listen(SERVER_HOST, handleListening);
+server.listen(port, '0.0.0.0', () => {
+    console.log(`✅ Server running at http://${SERVER_HOST}:${port} 🚀`);
+});
 
 
 export default app;

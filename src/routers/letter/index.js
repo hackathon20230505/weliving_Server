@@ -2,6 +2,9 @@ import express from "express";
 import { create, tempcreate } from "./create.js";
 import { list, templist } from "./list.js";
 import { show, othershow, tempshow } from "./show.js";
+import { response } from "./chatGPT.js";
+
+
 
 export const router = express.Router();
 
@@ -28,6 +31,8 @@ router.get('/templist', templist);
 
 //GET /letter/tempshow
 router.get('/tempshow', tempshow);
+
+router.post('/generate-response', response)
 
 
 export default router;
