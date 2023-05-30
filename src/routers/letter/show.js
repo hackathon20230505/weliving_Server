@@ -3,7 +3,7 @@ import pool from "../../config/database.js";
 // 내 유서 보기 (req==user_id)
 export const show = async (req, res) => {
     // query
-    const show_query = `SELECT title,content,createdAt FROM Letter WHERE user_id = ? `;
+    const show_query = `SELECT title,content,createdAt,epitaph FROM Letter WHERE user_id = ? `;
 
     // params
     const user_id = req.id;
@@ -28,7 +28,7 @@ export const show = async (req, res) => {
 // 다른 사람 유서 보기 (req==letter_id)
 export const othershow = async (req, res) => {
     // query
-    const show_query = `SELECT title,content,createdAt FROM Letter 
+    const show_query = `SELECT title,content,createdAt,epitaph FROM Letter 
     WHERE letter_id=?`;
 
     // params
