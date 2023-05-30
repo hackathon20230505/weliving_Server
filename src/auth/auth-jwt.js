@@ -10,8 +10,6 @@ export const sign = (user) => {
     id: user.user_id,
   };
 
-  console.log(payload);
-
 
   return jwt.sign(payload, process.env.JWT_SECRET, {
     algorithm: 'HS256',
