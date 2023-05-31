@@ -28,7 +28,7 @@ const SERVER_HOST = process.env.SERVER_HOST;
 const port = 3000;
 
 
-server.listen(port, '0.0.0.0', () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`✅ Server running at http://${SERVER_HOST}:${port} 🚀`);
 });
 
