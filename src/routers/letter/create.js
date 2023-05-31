@@ -35,22 +35,24 @@ export const create = async (req, res) => {
 };
 
 
-//유서 작성 API
+//묘비명 추가 API
 export const epitaph_create = async (req, res) => {
     // query
-    const create_query = 
-    `UPDATE Letter SET epitaph = ? WHERE user_id = ?;
-    SELECT letter_id WHERE user_id = ?`;
+    const create_query = `UPDATE Letter SET epitaph = ? WHERE user_id = ?;`;
+    
+    const get_query=`SELECT letter_id FROM Letter WHERE user_id = ?;`;
 
     // params
     const { epitaph } = req.body;
     const user_id = req.id;
-    const params = [epitaph, user_id, user_id];
+    const params = [epitaph, user_id];
 
     // execute & respond
     try {
+        
         const conn = await pool.getConnection();
-        const [data] = await conn.query(create_query, params);
+        await conn.query(create_query, params);
+        const [data] = await conn.query(get_query, user_id);
 
         //성공
         return res.status(200).send({
