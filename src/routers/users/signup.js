@@ -8,16 +8,13 @@ export const signup = async(req,res) => {
 try { 
     const conn = await pool.getConnection();
 
-    const { email, pnumber, agearea} = req.body;
-
+    const { email, Birth} = req.body;
     let { password } = req.body;
-    let { DCatAlarm } = req.body; 
-    DCatAlarm = formattedTime
 
     const checkUser = `SELECT email FROM User WHERE email=?;`;
     const [alreadyUser] = await conn.query(checkUser, [email])
 
-    if (alreadyUser) {
+    if (alreadyUser.length > 0) {
         res.status(404).json({
             ok : false,
             msg : ' This E-mail is already taken. '
@@ -29,8 +26,8 @@ try {
             const hashedPassword = await bcrypt.hash(password, salt);
             password = hashedPassword;
         
-                const sql = `INSERT INTO User (email, password, pnumber, agearea, DCatAlarm) VALUES (?,?,?,?,?);`;
-                const [newUser] = await conn.query(sql, [email, password, pnumber, agearea, DCatAlarm]);
+                const sql = `INSERT INTO User (email, password, birth, agreeTime) VALUES (?,?,?,?);`;
+                const [newUser] = await conn.query(sql, [email, password, Birth, formattedTime]);
         
         
                 const token = sign(newUser);
