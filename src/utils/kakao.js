@@ -34,7 +34,7 @@ export const signInKakao = async (kakaoToken) => {
         await conn.query(create_query, params);
     }
 
-    return jwt.sign({ email: email }, process.env.JWT_SECRET);
+    return [jwt.sign({ email: email }, process.env.JWT_SECRET),email];
 
 };
 

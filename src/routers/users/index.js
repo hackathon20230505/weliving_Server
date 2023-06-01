@@ -3,7 +3,7 @@ import express from "express";
 import refresh from "./refresh.js";
 import { signin } from "./signin.js";
 import { signup } from "./signup.js";
-import { kakao } from "./kakao.js";
+import { kakao, birth } from "./kakao.js";
 export const router = express.Router();
 
 
@@ -114,5 +114,7 @@ router.post('/signin', signin);
 router.post('/refresh', refresh);
 
 router.post('/kakao', kakao);
+
+router.post('/birth', birth);
 
 export default router;
