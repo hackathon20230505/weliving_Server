@@ -3,6 +3,7 @@ import { create, tempcreate, epitaph_create } from "./create.js";
 import { list, templist } from "./list.js";
 import { show, othershow, tempshow } from "./show.js";
 import { response } from "./chatGPT.js";
+import { generateMemoryImage }  from "./Dalle-2.js";
 
 
 
@@ -37,8 +38,9 @@ router.get('/tempshow', tempshow);
 //POST /letter/generate-response 
 router.post('/generate-response', response);
 
+router.post('/generate-image', generateMemoryImage);
+
 //POST /letter/epitaph-create
 router.post('/epitaph-create', epitaph_create);
-
 
 export default router;
