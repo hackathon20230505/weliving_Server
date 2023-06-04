@@ -9,7 +9,7 @@ export const letter_create = async (req, res) => {
 
     // params
     const { title, content } = req.body;
-    const user_id = req.id;
+    const user_id = req.ids;
     const createdAt = formattedTime;
     const isShare = 1; //true
     const params = [title, content, createdAt, isShare, user_id];
@@ -36,7 +36,7 @@ export const letter_create = async (req, res) => {
 export const letter_list = async (req, res) => {
     // params
     const { birth } = req.body;
-    console.log(birth);
+    
 
     // execute & respond
     try {

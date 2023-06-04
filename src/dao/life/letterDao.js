@@ -9,9 +9,9 @@ export const insert = async (connection, params) => {
 
 //유서 리스트 조회
 export const select_LetterList = async (connection, params) => {
-    const list_query = `SELECT letter_id,title,createdAt FROM Letter 
+    const list_query = `SELECT letter_id,title,createdAt FROM Letter
     WHERE user_id = ANY(
-        SELECT user_id FROM User WHERE birth=?
+        SELECT user_id FROM User WHERE birth LIKE '__?%'
     ) 
     AND isShare=1`;
 
