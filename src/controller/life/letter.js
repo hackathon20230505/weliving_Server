@@ -9,7 +9,7 @@ export const letter_create = async (req, res) => {
 
     // params
     const { title, content } = req.body;
-    const user_id = req.ids;
+    const user_id = req.id;
     const createdAt = formattedTime;
     const isShare = 1; //true
     const params = [title, content, createdAt, isShare, user_id];
