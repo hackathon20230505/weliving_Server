@@ -3,7 +3,7 @@ name: dev branch auto ci process script for Well-dying Service
 
 on: # 아래 job을 실행시킬 상황
   push:
-    branches: [ main ]
+    branches: [main]
 jobs:
   deploy:
     name: deploy
@@ -14,7 +14,7 @@ jobs:
         with:
           host: ${{ secrets.REMOTE_IP }} # 인스턴스 IP
           username: ${{ secrets.REMOTE_USER }} # 우분투 아이디
-          password: ${{ sercets.REMOTE_PASSWORD }} #우분투 비밀번호
+          password: ${{ secrets.REMOTE_PASSWORD }} #우분투 비밀번호
           script: | # 실행할 스크립트
             cd /var/www
             git pull origin main
