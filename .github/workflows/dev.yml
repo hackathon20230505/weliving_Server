@@ -3,7 +3,7 @@ name: dev branch auto ci process script for Well-dying Service
 
 on: # 아래 job을 실행시킬 상황
   push:
-    branches: [ main ]
+    branches: [main]
 jobs:
   deploy:
     name: deploy
