@@ -1,6 +1,7 @@
 import express from "express";
 import { letter_create, letter_list, letter_othershow, letter_show } from "../../controller/life/letter.js";
 import { response } from "../../controller/life/chatGPT.js";
+import { authJWT } from "../../utils/auth.js"
 export const router = express.Router();
 
 /* 유서 */
@@ -49,7 +50,7 @@ export const router = express.Router();
  *               
  */
 //POST /life/letter/create
-router.post('/create', letter_create);
+router.post('/create', authJWT, letter_create);
 
 /**
  * @swagger
@@ -149,7 +150,7 @@ router.get('/list', letter_list);
  *               
  */
 //GET /life/letter/show
-router.get('/show', letter_show);
+router.get('/show', authJWT,letter_show);
 
 /**
  * @swagger
