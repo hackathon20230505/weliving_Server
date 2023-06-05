@@ -17,7 +17,7 @@ try {
     if (alreadyUser.length > 0) {
         res.status(404).json({
             ok : false,
-            msg : ' This E-mail is already taken. '
+            msg : ' This E-mail is already taken'
         })
 
     } else {
