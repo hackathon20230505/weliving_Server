@@ -18,6 +18,7 @@ jobs:
           script: | # 실행할 스크립트
             cd /var/www
             git pull origin main
+            cd welldying_Server
             pm2 kill
             npm i --force
             npm run build
