@@ -31,15 +31,9 @@ export const router = express.Router();
  *               password:
  *                 type: string
  *                 description: "비밀번호"
- *               pnumber:
+ *               birth:
  *                 type: string
- *                 description : "연락처"
- *               agearea:
- *                 type: integer
- *                 description : "연령 대"
- *               DCatAlarm:
- *                 type: string
- *                 description : "알람 수신 시간 대"
+ *                 description : "태어난 년도 "
  *     responses:
  *       '200':
  *         description: 성공
