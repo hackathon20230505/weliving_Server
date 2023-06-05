@@ -107,6 +107,40 @@ router.post('/signin', signin);
 
 router.post('/refresh', refresh);
 
+/**
+ * @swagger
+ * 
+ * /users/kakao:
+ *   post:
+ *     tags: [Auth API]
+ *     summary: 카카오 로그인
+ *     description: 카카오 로그인을 위한 API입니다.
+ *     parameters:
+ *        - in: header
+ *          name: Authorization
+ *          required: true
+ *          description: 헤더에서 카카오 토큰을 Content-Type을 application/x-www-form-urlencoded로 전송한다. 이때, Key는 authorization, Value는 카카오측에서 받은 토큰으로 한다.
+ *          schema:
+ *              type: application/x-www-form-urlencoded 
+ *     responses:
+ *       '200':
+ *         description: 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                 accessToken:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *             example:
+ *               ok: true
+ *               accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNzQzMjMsImV4cCI6MTY4NTA3NDYyMywiaXNzIjoid2VsbC1keWluZyJ9.usr6JgprDoF1fd-jnmff4KZnuNsiN2Cn_rNVRRsqajA"
+ *               email: "lora3226@naver.com"
+ */
 router.post('/kakao', kakao);
 
 router.post('/birth', birth);

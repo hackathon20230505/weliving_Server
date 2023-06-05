@@ -3,14 +3,13 @@ import pool from "../../config/database.js";
 
 export const kakao = async (req, res) => {
     const headers = req.headers["authorization"];
-    const kakaoToken = headers.split(" ")[1];
     
     //테스트용
-    // const kakaoToken = "UXqkrFHif23Y0KMQ6wP2rh9AGcFPSvhiFX_ydxcACiolUQAAAYhwSGuA";
-    
-    const [accessToken,email] = await signInKakao(kakaoToken);
+    // const kakaoToken = "OSAXwM9D2AxQK4dNQpM04FY9CKtekbw08jody82aCiolUQAAAYiHi1Kg";
+    const [accessToken,email] = await signInKakao(headers);
     
     return res.status(200).send({
+        ok: true,
         accessToken: accessToken,
         email: email
     });
