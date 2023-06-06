@@ -4,6 +4,9 @@ import refresh from "./refresh.js";
 import { signin } from "./signin.js";
 import { signup } from "./signup.js";
 import { kakao, birth } from "./kakao.js";
+import { sendmessage } from "./sendmessage.js";
+import { authJWT } from "../../utils/auth.js";
+
 export const router = express.Router();
 
 
@@ -12,7 +15,7 @@ export const router = express.Router();
 /**
  * @swagger
  * 
- * /users/signup:
+ * /api/users/signup:
  *   post:
  *     tags: [Auth API]
  *     summary: 회원 가입
@@ -62,7 +65,7 @@ router.post('/signup', signup);
 /**
  * @swagger
  * 
- * /users/signin:
+ * /api/users/signin:
  *   post:
  *     tags: [Auth API]
  *     summary: 로그인
@@ -105,7 +108,39 @@ router.post('/signup', signup);
 router.post('/signin', signin);
 
 
+/**
+ * @swagger
+ * 
+ * /api/users/refresh:
+ *   post:
+ *     tags: [Auth API]
+ *     summary: 토큰 재발급
+ *     description: access token이 만료되고, refresh token은 만료되지 않은 경우에 새로운 access token을 발급 합니다.
+ *
+ *     responses:
+ *       '200':
+ *         description: 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     token:
+ *                       type: string
+ *             example:
+ *               ok: true
+ *               data:
+ *                 accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNzQzMjMsImV4cCI6MTY4NTA3NDYyMywiaXNzIjoid2VsbC1keWluZyJ9.usr6JgprDoF1fd-jnmff4KZnuNsiN2Cn_rNVRRsqajA"
+ *                 refreshToken : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNzg0NTEsImV4cCI6MTY4NTA3OTA1MSwiaXNzIjoid2VsbC1keWluZyJ9.pgfPJwjhYIwslTyo7UcVrP6EMNHVAgc2xZVL81j8dhE"
+ */
 router.post('/refresh', refresh);
+
+
 
 /**
  * @swagger
@@ -142,6 +177,8 @@ router.post('/refresh', refresh);
  *               email: "lora3226@naver.com"
  */
 router.post('/kakao', kakao);
+
+router.post('/send-message', authJWT, sendmessage)
 
 router.post('/birth', birth);
 

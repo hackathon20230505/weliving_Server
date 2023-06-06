@@ -198,6 +198,40 @@ router.get('/show', letter_show);
 //GET /life/letter/othershow
 router.get('/othershow', letter_othershow);
 
+
+
+/**
+ * @swagger
+ * 
+ * /api/life/letter/generate-response:
+ *   post:
+ *     tags: [letter]
+ *     summary: ChatGPT 글쓰기 응답 API
+ *     description: 유저의 마음챙김 글쓰기 후 해당 글을 바탕으로 chatGPT의 AI 응답 모델을 기반으로 긍정과 희망의 메시지를 전달합니다.
+ *     requestBody:
+ *       description: 사용자가 서버로 전달하는 값에 따라 결과 값은 다릅니다. (마음 챙김 글쓰기 본문 내용)
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userLetter:
+ *                 type: string
+ *                 description: "글쓰기 본문 내용"
+ *     responses:
+ *       '200':
+ *         description: 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *                   type: object
+ *                   properties:
+ *                     response:
+ *                       type: string
+ *             example:
+ *                 response: "XX아, 너는 삶에서 당당하게 살아왔어. 매일같이 취업준비를 하면서도, 끝까지 포기하지 않고 최선을 다해왔어. 내가 너에게 전할 수 있는 말은, 너는 메말라있는 나무에서도 꽃을 피울 수 있는 힘이 있어. 너는 이미 충분히 용감하고 희망적인 사람이야. 이제는 나와 함께, 삶을 새롭게 시작해보자. 너는 세상에서 소중한 존재야. 함께 행복한 시간을 보내며, 너의 인생을 더욱 살아보자."
+ */
 //POST /life/letter/generate-response 
 router.post('/generate-response', response);
 

@@ -12,7 +12,7 @@ import memoryRouter from "./memory.js";
  *   name: letter
  *   description: 유서 작성, 리스트 조회, 보여주기, chatGPT 응답 API
  */
-router.use('/letter', letterRouter );
+router.use('/letter', letterRouter);
 
 /**
  * @swagger
