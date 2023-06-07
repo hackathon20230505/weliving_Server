@@ -4,8 +4,7 @@ dotenv.config();
 
 export const redisClient =  await redis.createClient({
   legacyMode: true,
-  host: process.env.SERVER_HOST,
-  port: process.env.REDIS_PORT,
+  url: 'redis://redis:6379'
 });
 
 

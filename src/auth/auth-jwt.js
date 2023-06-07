@@ -40,7 +40,7 @@ export const verify = (token) => {
 export const refresh = () => {
   return jwt.sign({}, process.env.JWT_SECRET, {
     algorithm: 'HS256',
-    expiresIn: '10m',
+    expiresIn: '30m',
     issuer: 'well-dying',
   });
 };

@@ -6,6 +6,7 @@ import { signup } from "./signup.js";
 import { kakao, birth } from "./kakao.js";
 import { sendmessage } from "./sendmessage.js";
 import { authJWT } from "../../utils/auth.js";
+import { verifyMessage } from "./verifymessage.js";
 
 export const router = express.Router();
 
@@ -18,7 +19,7 @@ export const router = express.Router();
  * /api/users/signup:
  *   post:
  *     tags: [Auth API]
- *     summary: 회원 가입
+ *     summary: 회원가입
  *     description: 회원가입을 위한 API입니다. 이메일 /비밀번호 / 연락처 / 연령 대 / 알람 수신 시간 대를 전달하여 새로운 사용자를 생성합니다.
  *     requestBody:
  *       description: 사용자가 서버로 전달하는 값에 따라 결과 값은 다릅니다. (유저 등록)
@@ -178,7 +179,9 @@ router.post('/refresh', refresh);
  */
 router.post('/kakao', kakao);
 
-router.post('/send-message', authJWT, sendmessage)
+router.post('/send-message', sendmessage)
+
+router.post('/verify-message', verifyMessage)
 
 router.post('/birth', birth);
 
