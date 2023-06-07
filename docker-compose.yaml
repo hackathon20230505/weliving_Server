@@ -12,7 +12,9 @@ services:
     depends_on:
       - mysql-server
       - redis
-        
+    
+    command: pm2 start app.js
+    
   mysql-server:
     image: mysql:8.0
 
