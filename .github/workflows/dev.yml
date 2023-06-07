@@ -1,9 +1,10 @@
 name: Deploy to Amazon ECR
 
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches:
-      - main
+    branches: ["main"]
 
   workflow_dispatch:
 
@@ -26,6 +27,21 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Setting .env
+        run: |
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "SERVER_HOST=${{ secrets.DB_USER }}" >> .env
+          echo "DB_USER=${{ secrets.DATABASE_HOST }}" >> .env
+          echo "DB_PASS=${{ secrets.DB_PASS }}" >> .env
+          echo "DB_NAME=${{ secrets.DB_NAME }}">> .env
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+          echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+          echo "GPT_KEY=${{ secrets.GPT_KEY }}" >> .env
+          echo "SENS_SERVICE_ID=${{ secrets.SENS_SERVICE_ID }}" >> .env
+          echo "SENS_SESENS_ACCESS_KEYCRET_KEY=${{ secrets.SENS_ACCESS_KEY }}" >> .env
+
       - name: Login to Amazon ECR
         id: login-ecr-public
         uses: aws-actions/amazon-ecr-login@v1
@@ -37,7 +53,7 @@ jobs:
         env:
           REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
           REGISTRY_ALIAS: i8c7e5c5
-          REPOSITORY: jincheol
+          REPOSITORY: weliving
           IMAGE_TAG: ${{ github.sha }}
 
         run: |
