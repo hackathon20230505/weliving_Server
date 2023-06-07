@@ -15,7 +15,11 @@ services:
       - redis
     
     command: pm2 start app.js
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 283781b (fix: compose 파일에 pm2 start 추가)
   mysql-server:
     image: mysql:8.0
 
