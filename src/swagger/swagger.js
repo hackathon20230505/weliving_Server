@@ -6,9 +6,9 @@ const options = {
       openapi: "3.0.0",
       info: {
         version: "1.0.0",
-        title: "WellDying",
+        title: "Well-Living",
         description:
-          "WellDying AI",
+          "WellLiving API",
       },
       servers: [
         {

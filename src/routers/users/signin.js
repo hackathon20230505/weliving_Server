@@ -9,8 +9,6 @@ export const signin = async(req,res) => {
 
     const { email , password } = req.body;
 
-
-
     const conn = await pool.getConnection();
 
     const sql = `SELECT user_id, email, password FROM User WHERE email=?`;

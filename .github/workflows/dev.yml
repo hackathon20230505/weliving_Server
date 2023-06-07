@@ -1,24 +1,46 @@
-# dev.yml
-name: dev branch auto ci process script for Well-dying Service
+name: Deploy to Amazon ECR
 
-on: # 아래 job을 실행시킬 상황
+on:
   push:
-    branches: [main]
+    branches:
+      - main
+
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-east-1
+
 jobs:
-  deploy:
-    name: deploy
-    runs-on: ubuntu-20.04 # 실행될 인스턴스 OS와 버전
+  build:
+    name: Build image
+    runs-on: ubuntu-latest
+
     steps:
-      - name: excuting remote ssh commands
-        uses: appleboy/ssh-action@v0.1.6 # ssh 접속하는 오픈소스
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          host: ${{ secrets.REMOTE_IP }} # 인스턴스 IP
-          username: ${{ secrets.REMOTE_USER }} # 우분투 아이디
-          password: ${{ secrets.REMOTE_PASSWORD }} #우분투 비밀번호
-          script: | # 실행할 스크립트
-            cd /var/www/welldying_Server
-            git pull origin main
-            pm2 kill
-            npm install --force
-            npm run build
-            pm2 start app.js
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr-public
+        uses: aws-actions/amazon-ecr-login@v1
+        with:
+          registry-type: public
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
+          REGISTRY_ALIAS: i8c7e5c5
+          REPOSITORY: jincheol
+          IMAGE_TAG: ${{ github.sha }}
+
+        run: |
+          docker buildx build --platform=linux/amd64 -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
