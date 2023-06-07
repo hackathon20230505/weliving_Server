@@ -37,7 +37,7 @@ jobs:
         env:
           REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
           REGISTRY_ALIAS: i8c7e5c5
-          REPOSITORY: jincheol
+          REPOSITORY: weliving
           IMAGE_TAG: ${{ github.sha }}
 
         run: |
