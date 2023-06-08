@@ -137,11 +137,14 @@ router.get('/list', letter_list);
  *                       type: string
  *                       description: 유서 제목
  *                     content:
- *                       type : string
+ *                       type: string
  *                       description: 유서 내용
- *                     createdAt :
- *                        type: string
- *                        description: 유서 작성일 ("YYYY-MM-DD HH-MM-SS")         
+ *                     createdAt:
+ *                       type: string
+ *                       description: 유서 작성일 ("YYYY-MM-DD HH-MM-SS")  
+ *                     isShare:
+ *                       type: int
+ *                       description: 1 (공개), 0 (비공개)      
  *               
  */
 //GET /life/letter/show
@@ -247,7 +250,7 @@ router.post('/generate-response', response);
  *             type: object
  *             properties:
  *               isShare:
- *                 type: boolean
+ *                 type: int
  *                 description: "공개 : 1, 비공개 : 0"
  *               user_id:
  *                 type: int
