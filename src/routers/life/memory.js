@@ -23,7 +23,7 @@ export const router = express.Router();
  *               user_id:
  *                 type: int
  *                 description: 사용자 id, jwt token으로 전달
- *               content:
+ *               memory:
  *                 type: json
  *                 description: {"1":"추억1", "2":"추억2"}
  *       

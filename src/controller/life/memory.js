@@ -36,7 +36,8 @@ export const memory_create = async (req, res) => {
 export const memory_show = async (req, res) => {
     // params
     const user_id = req.id;
-
+    // const {user_id}=req.body;
+    
     // execute & respond
     try {
         const conn = await pool.getConnection();

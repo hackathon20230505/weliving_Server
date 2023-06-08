@@ -46,7 +46,7 @@ export const router = express.Router();
  *               
  */
 //POST /life/templetter/create
-router.post('/create', authJWT, tempcreate);
+router.post('/create', authJWT,tempcreate);
 
 
 /**
@@ -98,7 +98,7 @@ router.post('/create', authJWT, tempcreate);
  *               
  */
 //GET /life/templetter/list
-router.get('/list', authJWT, templist);
+router.get('/list', authJWT,templist);
 
 /**
  * @swagger
@@ -119,7 +119,7 @@ router.get('/list', authJWT, templist);
  *                 type: int
  *                 description: 임시유서 리스트에서 response로 받은 letter_id
  *          example:
- *              "user_id" : 1
+ *              "letter_id" : 1
  *       
  *     responses:
  *       '200':

@@ -129,7 +129,7 @@ export const modify_isShare = async (req, res) => {
 // 유서 내용 수정하기
 export const modify_content = async (req, res) => {
     //params
-    const { title, content } = req.body;
+    const { title, content} = req.body;
     const createdAt = formattedTime;
     const user_id = req.id;
     const params = [title, content, createdAt, user_id];
