@@ -22,7 +22,7 @@ export const select_LetterList = async (connection, params) => {
 
 //user_id로 유서 가져오기 (내 유서보기)
 export const select_userid_Letter = async (connection, params) => {
-    const show_query = `SELECT title,content,createdAt FROM Letter WHERE user_id = ? `;
+    const show_query = `SELECT title,content,createdAt,isShare FROM Letter WHERE user_id = ? `;
 
     const [showResult] = await connection.query(show_query, params);
 
