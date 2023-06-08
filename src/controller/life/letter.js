@@ -1,6 +1,6 @@
 import pool from "../../config/database.js";
 import { formattedTime } from "../../utils/time.js"
-import { insert, select_LetterList, select_userid_Letter, select_letterid_Letter, update_modify_isShare } from "../../dao/life/letterDao.js"
+import { insert, select_LetterList, select_userid_Letter, select_letterid_Letter, update_modify_isShare, update_modify_content } from "../../dao/life/letterDao.js"
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -114,6 +114,30 @@ export const modify_isShare = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         await update_modify_isShare(conn, params);
+
+        return res.status(200).send({
+            ok: true
+        })
+    } catch (err) {
+        res.status(409).send({
+            ok: false,
+            msg: err.message,
+        })
+    }
+}
+
+// 유서 내용 수정하기
+export const modify_content = async (req, res) => {
+    //params
+    const { title, content, user_id } = req.body;
+    const createdAt = formattedTime;
+    // const user_id = req.id;
+    const params = [title, content, createdAt, user_id];
+
+    //execute & respond
+    try {
+        const conn = await pool.getConnection();
+        await update_modify_content(conn, params);
 
         return res.status(200).send({
             ok: true
