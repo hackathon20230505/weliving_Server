@@ -7,13 +7,13 @@ import { formattedTime } from "../../utils/time.js";
 export const signup = async (req, res) => {
     try {
 
-
         const conn = await pool.getConnection();
 
         const { email, Birth } = req.body;
         let { password, agreeTime } = req.body;
         agreeTime = formattedTime    
-        console.log(formattedTime);    
+        console.log(email)
+        console.log(password);
 
         const checkUser = `SELECT email FROM User WHERE email=?;`;
         const [alreadyUser] = await conn.query(checkUser, [email])
