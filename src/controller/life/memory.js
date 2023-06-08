@@ -6,7 +6,7 @@ dotenv.config();
 //추억 카드 추가 API
 export const memory_create = async (req, res) => {
     // params
-    let { memory} = req.body;
+    let { memory } = req.body;
     memory=JSON.stringify(memory);
     const user_id = req.id;
 
@@ -19,7 +19,7 @@ export const memory_create = async (req, res) => {
 
         return res.status(200).send({
             ok: true,
-            letter_id
+            letter_id: letter_id
         })
 
     } catch (err) {

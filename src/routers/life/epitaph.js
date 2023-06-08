@@ -6,6 +6,7 @@ export const router = express.Router();
 
 
 /* 묘비명 */
+
 //POST /life/epitaph/create
 router.post('/create', authJWT,epitaph_create);
 
