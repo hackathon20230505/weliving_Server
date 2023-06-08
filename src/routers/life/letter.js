@@ -40,11 +40,6 @@ export const router = express.Router();
  *               properties:
  *                 ok:
  *                   type: boolean
- *                 data:
- *                   type: object
- *                   properties:
- *                     token:
- *                       type: string
  *             example:
  *               ok: true
  *               
@@ -59,7 +54,7 @@ router.post('/create', authJWT, letter_create);
  *   get:
  *     tags: [letter]
  *     summary: 유서 리스트 조회 API
- *     description: 유서 제목과 그에 해당하는 유서 id, 만들어진 날짜에 대한 데이터를 받는 API입니다. 조회하고 싶은 년대를 request body에 넣어주세요. 
+ *     description: 나이대에 해당하는 여러 유서에 대한 데이터를 받는 API입니다. 유서에 대한 데이터는 유서 제목과 그에 해당하는 유서 id, 만들어진 날짜로 구성되어있습니다. 조회하고 싶은 년대를 request body에 넣어주세요. 
  *     requestBody:
  *       required: true
  *       content:
@@ -236,11 +231,83 @@ router.get('/othershow', letter_othershow);
 //POST /life/letter/generate-response 
 router.post('/generate-response', response);
 
+/**
+ * @swagger
+ * 
+ * /life/letter/modify-isShare:
+ *   post:
+ *     tags: [letter]
+ *     summary: 유서 공개/비공개 수정 API
+ *     description: 공개/비공개 수정을 위한 API입니다. isShare = 1일 경우 공개, 0일 경우 비공개입니다. 
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               isShare:
+ *                 type: boolean
+ *                 description: "공개 : 1, 비공개 : 0"
+ *               user_id:
+ *                 type: int
+ *                 description : "사용자 id가 들어있는 jwt 토큰"
+ *       
+ *     responses:
+ *       '200':
+ *         description: 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *             example:
+ *               ok: true
+ *               
+ */
 //POST /life/letter/modify-isShare
-router.post('/modify-isShare', modify_isShare);
+router.post('/modify-isShare',authJWT, modify_isShare);
 
-
+/**
+ * @swagger
+ * 
+ * /life/letter/modify-content:
+ *   post:
+ *     tags: [letter]
+ *     summary: 유서 수정 API
+ *     description: 유서 내용을 바꾸는 API입니다. request는 유서 제목, 내용입니다. 
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               content:
+ *                 type: string
+ *               user_id:
+ *                 type: int
+ *                 description : "사용자 id가 들어있는 jwt 토큰"
+ *       
+ *     responses:
+ *       '200':
+ *         description: 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *             example:
+ *               ok: true
+ *               
+ */
 //POST /life/letter/modify-content
-router.post('/modify-content', modify_content);
+router.post('/modify-content', authJWT, modify_content);
 
 export default router;
