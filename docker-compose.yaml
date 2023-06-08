@@ -4,11 +4,8 @@ services:
     build:
       context: .
       dockerfile : Dockerfile
-<<<<<<< HEAD
-=======
 
       
->>>>>>> 4d15e40 (fix: signup agreetime 수정)
     platform: linux/amd64
     ports:
       - 3000:3000
@@ -20,15 +17,6 @@ services:
       - redis
     
     command: pm2 start app.js
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 283781b (fix: compose 파일에 pm2 start 추가)
-=======
-
->>>>>>> 4d15e40 (fix: signup agreetime 수정)
   mysql-server:
     image: mysql:8.0
 
