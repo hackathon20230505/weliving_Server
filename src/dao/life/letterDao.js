@@ -37,3 +37,11 @@ export const select_letterid_Letter = async (connection, params) => {
 
     return [showResult];
 };
+
+export const update_modify_isShare=async(connection,params)=>{
+    const update_query=`UPDATE hackathon.Letter SET isShare = ? WHERE user_id = ?; `
+
+    const [updateResult] = await connection.query(update_query, params);
+
+    return [updateResult];
+}

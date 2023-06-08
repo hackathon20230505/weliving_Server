@@ -1,5 +1,5 @@
 import express from "express";
-import { letter_create, letter_list, letter_othershow, letter_show } from "../../controller/life/letter.js";
+import { letter_create, letter_list, letter_othershow, letter_show, modify_isShare } from "../../controller/life/letter.js";
 import { response } from "../../controller/life/chatGPT.js";
 import { authJWT } from "../../utils/auth.js"
 export const router = express.Router();
@@ -150,7 +150,7 @@ router.get('/list', letter_list);
  *               
  */
 //GET /life/letter/show
-router.get('/show', authJWT,letter_show);
+router.get('/show', authJWT, letter_show);
 
 /**
  * @swagger
@@ -235,5 +235,8 @@ router.get('/othershow', letter_othershow);
  */
 //POST /life/letter/generate-response 
 router.post('/generate-response', response);
+
+//POST /life/letter/modify_isShare
+router.post('/modify_isShare', modify_isShare);
 
 export default router;
