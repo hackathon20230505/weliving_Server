@@ -4,6 +4,9 @@ services:
     build:
       context: .
       dockerfile : Dockerfile
+
+      
+    platform: linux/amd64
     ports:
       - 3000:3000
     volumes:
@@ -14,7 +17,7 @@ services:
       - redis
     
     command: pm2 start app.js
-    
+
   mysql-server:
     image: mysql:8.0
 
