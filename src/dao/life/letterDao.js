@@ -45,3 +45,11 @@ export const update_modify_isShare=async(connection,params)=>{
 
     return [updateResult];
 }
+
+export const update_modify_content=async(connection,params)=>{
+    const update_query=`UPDATE hackathon.Letter SET title=?, content=?, createdAt=? WHERE user_id = ?; `
+
+    const [updateResult] = await connection.query(update_query, params);
+
+    return [updateResult];
+}
