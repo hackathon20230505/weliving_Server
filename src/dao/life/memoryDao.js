@@ -5,8 +5,10 @@ export const insert_memory = async (connection, params) => {
 
     const [res] = await connection.query(letter_query, params[1]);
 
+
+
     let create_param=[];
-    create_param.push(params[0][0]);
+    create_param.push(params[0][0].toString());
     create_param.push(params[0][1]);
     create_param.push(res[0].letter_id);
 

@@ -26,6 +26,9 @@ export const router = express.Router();
  *               content:
  *                 type: string
  *                 description: "유서 내용"
+ *               isShare:
+ *                 type: int
+ *                 description: 1==공개, 0==비공개
  *               user_id:
  *                 type: int
  *                 description : "사용자 id가 들어있는 jwt 토큰"
