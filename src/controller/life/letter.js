@@ -1,6 +1,6 @@
 import pool from "../../config/database.js";
 import { formattedTime } from "../../utils/time.js"
-import { insert, select_LetterList, select_userid_Letter, select_letterid_Letter, update_modify_isShare, update_modify_content } from "../../dao/life/letterDao.js"
+import { insert, select_LetterList, select_userid_Letter, select_letterid_Letter, update_modify_isShare, update_modify_content, select_LetterList_all } from "../../dao/life/letterDao.js"
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -35,13 +35,13 @@ export const letter_create = async (req, res) => {
 export const letter_list = async (req, res) => {
     // params
     const { birth } = req.body;
-
-
+    
     // execute & respond
     try {
         const conn = await pool.getConnection();
         const [data] = await select_LetterList(conn, birth);
         conn.release();
+
         return res.status(200).send({
             ok: true,
             data: {
@@ -128,7 +128,7 @@ export const modify_isShare = async (req, res) => {
 // 유서 내용 수정하기
 export const modify_content = async (req, res) => {
     //params
-    const { title, content} = req.body;
+    const { title, content } = req.body;
     const createdAt = formattedTime;
     const user_id = req.id;
     const params = [title, content, createdAt, user_id];
