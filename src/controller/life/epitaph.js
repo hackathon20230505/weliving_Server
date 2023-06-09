@@ -15,7 +15,7 @@ export const epitaph_create = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         await insert_epitaph(conn,params);
-
+        conn.release();
         //성공
         return res.status(200).send({
             ok: true,

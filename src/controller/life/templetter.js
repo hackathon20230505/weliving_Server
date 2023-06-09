@@ -17,7 +17,7 @@ export const tempcreate = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         await insert_tempLetter(conn, params);
-
+        conn.release();
         return res.status(200).send({
             ok: true
         })
@@ -41,7 +41,7 @@ export const templist = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         const [data] = await select_tempLetterList(conn, user_id);
-
+        conn.release();
         return res.status(200).send({
             ok: true,
             data: {
@@ -67,7 +67,7 @@ export const tempshow = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         const [data] = await select_tempLetter(conn, letter_id);
-
+        conn.release();
         return res.status(200).send({
             ok: true,
             data: data

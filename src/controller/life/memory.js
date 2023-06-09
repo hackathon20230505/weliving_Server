@@ -16,7 +16,7 @@ export const memory_create = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         const [letter_id]=await insert_memory(conn, [params,user_id]);
-
+        conn.release();
         return res.status(200).send({
             ok: true,
             letter_id: letter_id
@@ -42,7 +42,7 @@ export const memory_show = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         let [data] = await select_userid_Memory(conn,user_id);
-
+        conn.release();
         if(data[0]===undefined){
             return res.status(409).send({
                 ok:false,
@@ -75,7 +75,7 @@ export const memory_othershow = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         let [data] = await select_letterid_Memory(conn,letter_id);
-
+        conn.release();
         if(data[0]===undefined){
             return res.status(409).send({
                 ok:false,

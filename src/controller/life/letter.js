@@ -42,7 +42,7 @@ export const letter_list = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         const [data] = await select_LetterList(conn, birth);
-
+        conn.release();
         return res.status(200).send({
             ok: true,
             data: {
@@ -68,7 +68,7 @@ export const letter_show = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         const [data] = await select_userid_Letter(conn, user_id);
-
+        conn.release();
         return res.status(200).send({
             ok: true,
             data: data
@@ -90,7 +90,7 @@ export const letter_othershow = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         const [data] = await select_letterid_Letter(conn, letter_id);
-
+        conn.release();
         return res.status(200).send({
             ok: true,
             data: data
@@ -114,7 +114,7 @@ export const modify_isShare = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         await update_modify_isShare(conn, params);
-
+        conn.release();
         return res.status(200).send({
             ok: true
         })
@@ -138,7 +138,7 @@ export const modify_content = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         await update_modify_content(conn, params);
-
+        conn.release();
         return res.status(200).send({
             ok: true
         })
