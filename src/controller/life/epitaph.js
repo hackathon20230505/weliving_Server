@@ -12,22 +12,22 @@ export const epitaph_create = async (req, res) => {
     console.log(params);
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         await insert_epitaph(conn,params);
-        conn.release();
         //성공
         return res.status(200).send({
             ok: true,
         })
-
     } catch (err) {
         res.status(409).send({
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
-
 };
 
 //묘비명 불러오기 API
@@ -37,9 +37,9 @@ export const epitaph_show = async (req, res) => {
     // const {user_id}=req.body;
 
     // execute & respond
+    let conn;
     try {
-
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         const [data] = await select_epitaph(conn,user_id);
 
         //성공
@@ -53,6 +53,7 @@ export const epitaph_show = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
-
 };

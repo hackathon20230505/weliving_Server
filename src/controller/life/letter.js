@@ -14,8 +14,9 @@ export const letter_create = async (req, res) => {
     const params = [title, content, createdAt, isShare, user_id];
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         await insert(conn, params);
 
         return res.status(200).send({
@@ -27,6 +28,8 @@ export const letter_create = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 
 };
@@ -37,10 +40,10 @@ export const letter_list = async (req, res) => {
     const { birth } = req.body;
     
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         const [data] = await select_LetterList(conn, birth);
-        conn.release();
 
         return res.status(200).send({
             ok: true,
@@ -54,6 +57,8 @@ export const letter_list = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 };
 
@@ -64,10 +69,11 @@ export const letter_show = async (req, res) => {
     const user_id = req.id;
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         const [data] = await select_userid_Letter(conn, user_id);
-        conn.release();
+
         return res.status(200).send({
             ok: true,
             data: data
@@ -77,6 +83,8 @@ export const letter_show = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 };
 
@@ -86,10 +94,11 @@ export const letter_othershow = async (req, res) => {
     const { letter_id } = req.body;
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         const [data] = await select_letterid_Letter(conn, letter_id);
-        conn.release();
+
         return res.status(200).send({
             ok: true,
             data: data
@@ -99,6 +108,8 @@ export const letter_othershow = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 };
 
@@ -110,10 +121,11 @@ export const modify_isShare = async (req, res) => {
     const params = [isShare, user_id];
 
     //execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         await update_modify_isShare(conn, params);
-        conn.release();
+
         return res.status(200).send({
             ok: true
         })
@@ -122,6 +134,8 @@ export const modify_isShare = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 }
 
@@ -134,10 +148,11 @@ export const modify_content = async (req, res) => {
     const params = [title, content, createdAt, user_id];
 
     //execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         await update_modify_content(conn, params);
-        conn.release();
+
         return res.status(200).send({
             ok: true
         })
@@ -146,5 +161,7 @@ export const modify_content = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 }

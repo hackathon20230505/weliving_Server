@@ -24,9 +24,12 @@ export const birth = async(req,res)=>{
     const params=[birth,email];
 
     //execute
+    let conn;
+
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         await conn.query(update_query, params);
+        conn.release();
 
         //성공
         return res.status(200).send({
@@ -38,5 +41,7 @@ export const birth = async(req,res)=>{
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 }
