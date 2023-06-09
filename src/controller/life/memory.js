@@ -7,7 +7,6 @@ dotenv.config();
 export const memory_create = async (req, res) => {
     // params
     let { memory } = req.body;
-    memory=JSON.stringify(memory);
     const user_id = req.id;
 
     const params=[memory,user_id];
@@ -42,19 +41,20 @@ export const memory_show = async (req, res) => {
     try {
         const conn = await pool.getConnection();
         let [data] = await select_userid_Memory(conn,user_id);
-        conn.release();
+
         if(data[0]===undefined){
             return res.status(409).send({
                 ok:false,
                 msg: "해당 사용자는 추억 카드를 작성하지 않았습니다."
             })
         }else{
-            data=JSON.parse(data[0].content);
+            const arr = data[0].content.split(',');
 
+            console.log(data);
             return res.status(200).send({
                 ok: true,
-                count : Object.keys(data).length,
-                memory: data
+                count : data.length,
+                memory: arr
             })
         }
 
@@ -82,13 +82,16 @@ export const memory_othershow = async (req, res) => {
                 msg: "해당 사용자는 추억 카드를 작성하지 않았습니다."
             })
         }else{
-            data=JSON.parse(data[0].content);
+            const arr = data[0].content.split(',');
+
+            console.log(data);
             return res.status(200).send({
                 ok: true,
-                count : Object.keys(data).length,
-                memory: data
-            }) 
+                count : arr.length,
+                memory: arr
+            })
         }
+
         
     } catch (err) {
         res.status(409).send({

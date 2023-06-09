@@ -24,8 +24,11 @@ export const router = express.Router();
  *                 type: int
  *                 description: 사용자 id, jwt token으로 전달
  *               memory:
- *                 type: json
- *                 description: {"1":"추억1", "2":"추억2"}
+ *                 type: array
+ *                 description: ["추억 1","추억 2"]
+ *           example:
+ *              "user_id": "(jwt token)"
+ *              "memory": ["추억1","추억2","추억3"]
  *       
  *     responses:
  *       '200':
@@ -80,9 +83,12 @@ router.post('/create', authJWT, memory_create);
  *                   type: int
  *                   description: 추억 카드가 몇개있는지 
  *                 memory:
- *                   type: json
- *                   description: 예시 = {"1":"맛있는 음식","2":"아끼는 인형"}
- *               
+ *                   type: array
+ *                   description: 추억카드 내용
+ *             example:
+ *               ok : true,
+ *               count : 3,
+ *               memory : ["추억1","추억2","추억3"]  
  */
 //GET /life/memory/show
 router.get('/show', authJWT, memory_show);
@@ -119,8 +125,13 @@ router.get('/show', authJWT, memory_show);
  *                   type: int
  *                   description: 추억 카드가 몇개있는지 
  *                 memory:
- *                   type: json
- *                   description: 예시 = {"1":"맛있는 음식","2":"아끼는 인형"}
+ *                   type: array
+ *                   description: 추억카드 내용
+ *             example:
+ *               ok : true,
+ *               count : 3,
+ *               memory : ["추억1","추억2","추억3"]  
+ *
  *               
  */
 //GET /life/memory/othershow
