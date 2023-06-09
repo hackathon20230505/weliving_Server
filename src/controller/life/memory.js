@@ -12,10 +12,11 @@ export const memory_create = async (req, res) => {
     const params=[memory,user_id];
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         const [letter_id]=await insert_memory(conn, [params,user_id]);
-        conn.release();
+
         return res.status(200).send({
             ok: true,
             letter_id: letter_id
@@ -26,6 +27,8 @@ export const memory_create = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 
 };
@@ -36,10 +39,11 @@ export const memory_show = async (req, res) => {
     // params
     const user_id = req.id;
     // const {user_id}=req.body;
-    
+
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         let [data] = await select_userid_Memory(conn,user_id);
 
         if(data[0]===undefined){
@@ -63,6 +67,8 @@ export const memory_show = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 };
 
@@ -72,10 +78,11 @@ export const memory_othershow = async (req, res) => {
     const { letter_id } = req.body;
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         let [data] = await select_letterid_Memory(conn,letter_id);
-        conn.release();
+
         if(data[0]===undefined){
             return res.status(409).send({
                 ok:false,
@@ -91,12 +98,12 @@ export const memory_othershow = async (req, res) => {
                 memory: arr
             })
         }
-
-        
     } catch (err) {
         res.status(409).send({
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 };

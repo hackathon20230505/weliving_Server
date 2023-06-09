@@ -12,12 +12,12 @@ export const tempcreate = async (req, res) => {
     const createdAt = formattedTime;
     const params = [title, content, createdAt, user_id];
 
-
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         await insert_tempLetter(conn, params);
-        conn.release();
+
         return res.status(200).send({
             ok: true
         })
@@ -27,6 +27,8 @@ export const tempcreate = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 
 };
@@ -38,10 +40,11 @@ export const templist = async (req, res) => {
     // const {user_id} = req.body;
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         const [data] = await select_tempLetterList(conn, user_id);
-        conn.release();
+
         return res.status(200).send({
             ok: true,
             data: {
@@ -54,6 +57,8 @@ export const templist = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 };
 
@@ -64,10 +69,11 @@ export const tempshow = async (req, res) => {
     const { letter_id } = req.body;
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         const [data] = await select_tempLetter(conn, letter_id);
-        conn.release();
+
         return res.status(200).send({
             ok: true,
             data: data
@@ -77,5 +83,7 @@ export const tempshow = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 };

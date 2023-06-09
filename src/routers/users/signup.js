@@ -5,8 +5,9 @@ import { formattedTime } from "../../utils/time.js";
 
 
 export const signup = async (req, res) => {
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
 
         const { email, Birth } = req.body;
         let { password } = req.body;
@@ -19,16 +20,13 @@ export const signup = async (req, res) => {
                 ok: false,
                 msg: ' This E-mail is already taken.'
             })
-
         } else {
-
             const salt = await bcrypt.genSalt(10); // 랜덤한 솔트 값 생성
             const hashedPassword = await bcrypt.hash(password, salt);
             password = hashedPassword;
 
             const sql = `INSERT INTO User (email, password, birth, agreeTime) VALUES (?,?,?,?);`;
             const [newUser] = await conn.query(sql, [email, password, Birth, formattedTime]);
-
 
             const token = sign(newUser);
 
@@ -39,12 +37,12 @@ export const signup = async (req, res) => {
                 }
             })
         }
-
     } catch (err) {
         res.status(404).send({
             ok: false,
             msg: err.message,
-
         })
+    } finally {
+        if (conn) conn.release();
     }
 };
