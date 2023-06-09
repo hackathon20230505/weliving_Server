@@ -17,7 +17,7 @@ export const select_LetterList = async (connection, params) => {
     const listall_query = `SELECT letter_id,title,createdAt FROM Letter WHERE isShare=1`;
 
     
-    if(params==="all"){
+    if(params===6){
         var [listResult] = await connection.query(listall_query);
     }else{
         var [listResult] = await connection.query(list_query, params);
