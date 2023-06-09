@@ -24,8 +24,8 @@ export const router = express.Router();
  *                 type: int
  *                 description: 사용자 id, jwt token으로 전달
  *               memory:
- *                 type: json
- *                 description: {"1":"추억1", "2":"추억2"}
+ *                 type: array
+ *                 description: ["추억 1","추억 2"]
  *       
  *     responses:
  *       '200':
