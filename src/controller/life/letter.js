@@ -1,6 +1,6 @@
 import pool from "../../config/database.js";
 import { formattedTime } from "../../utils/time.js"
-import { insert, select_LetterList, select_userid_Letter, select_letterid_Letter, update_modify_isShare, update_modify_content, select_LetterList_all } from "../../dao/life/letterDao.js"
+import { insert, select_LetterList, select_userid_Letter, select_letterid_Letter, update_modify_isShare, update_modify_content } from "../../dao/life/letterDao.js"
 import dotenv from 'dotenv';
 dotenv.config();
 
