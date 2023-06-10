@@ -1,6 +1,6 @@
 import pool from "../../config/database.js";
 import { formattedTime } from "../../utils/time.js"
-import { insert, select_LetterList, select_userid_Letter, select_letterid_Letter, update_modify_isShare, update_modify_content, select_LetterList_all } from "../../dao/life/letterDao.js"
+import { insert, select_LetterList, select_userid_Letter, select_letterid_Letter, update_modify_isShare, update_modify_content } from "../../dao/life/letterDao.js"
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -95,7 +95,8 @@ export const letter_show = async (req, res) => {
 // 다른 사람 유서 보기 (req==letter_id)
 export const letter_othershow = async (req, res) => {
     // params
-    const { letter_id } = req.params.letter_id;
+    const { letter_id }  = req.params
+
 
     // execute & respond
     let conn;
