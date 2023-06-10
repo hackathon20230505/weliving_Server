@@ -1,6 +1,8 @@
 import pool from "../../config/database.js";
 import { formattedTime } from "../../utils/time.js"
-import { insert, select_LetterList, select_userid_Letter, select_letterid_Letter, update_modify_isShare, update_modify_content, select_LetterList_all } from "../../dao/life/letterDao.js"
+
+import { insert, select_LetterList, select_userid_Letter, select_letterid_Letter, update_modify_isShare, update_modify_content } from "../../dao/life/letterDao.js"
+
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -38,7 +40,9 @@ export const letter_create = async (req, res) => {
 // 최종 유서 리스트
 export const letter_list = async (req, res) => {
     // params
+
     let birth = parseInt(req.params.birth);
+
     // execute & respond
     let conn;
     try {
@@ -121,9 +125,11 @@ export const modify_isShare = async (req, res) => {
     const params = [isShare, user_id];
 
     //execute & respond
+
     let conn;
     try {
         conn = await pool.getConnection();
+
         await update_modify_isShare(conn, params);
 
         return res.status(200).send({
@@ -134,20 +140,24 @@ export const modify_isShare = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+
     } finally {
         if (conn) conn.release();
+
     }
 }
 
 // 유서 내용 수정하기
 export const modify_content = async (req, res) => {
     //params
+
     const { title, content } = req.body;
     const createdAt = formattedTime;
     const user_id = req.id;
     const params = [title, content, createdAt, user_id];
 
     //execute & respond
+
     let conn;
     try {
         conn = await pool.getConnection();
@@ -161,7 +171,9 @@ export const modify_content = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+
     } finally {
         if (conn) conn.release();
+
     }
 }
