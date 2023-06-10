@@ -8,10 +8,10 @@ dotenv.config();
 export const letter_create = async (req, res) => {
 
     // params
-    const { title, content, isShare } = req.body[data];
-        const user_id = req.id;
-        const createdAt = formattedTime;
-        const params = [title, content, createdAt, isShare, user_id];
+    const { title, content, isShare } = req.body;
+    const user_id = req.id;
+    const createdAt = formattedTime;
+    const params = [title, content, createdAt, isShare, user_id];
 
     // execute & respond
     let conn;
@@ -26,12 +26,7 @@ export const letter_create = async (req, res) => {
     } catch (err) {
         res.status(409).send({
             ok: false,
-            msg: err.message,
-            title: title,
-            content: content,
-            user_id: user_id,
-            reqbody: req.body
-
+            msg: err.message
 
         })
     } finally {
@@ -44,7 +39,7 @@ export const letter_create = async (req, res) => {
 export const letter_list = async (req, res) => {
     // params
     const { birth } = req.body;
-    
+
     // execute & respond
     let conn;
     try {
