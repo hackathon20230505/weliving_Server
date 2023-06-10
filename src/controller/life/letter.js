@@ -27,6 +27,12 @@ export const letter_create = async (req, res) => {
         res.status(409).send({
             ok: false,
             msg: err.message,
+            title: title,
+            content: content,
+            user_id: user_id,
+            reqbody: req.body
+
+
         })
     } finally {
         if (conn) conn.release();
