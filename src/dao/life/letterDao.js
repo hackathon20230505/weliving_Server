@@ -26,15 +26,6 @@ export const select_LetterList = async (connection, params) => {
     return [listResult];
 };
 
-//유서 리스트 조회2
-export const select_LetterList_all = async (connection, params) => {
-    const list_query = `SELECT letter_id,title,createdAt FROM Letter AND isShare=1`;
-
-    const [listResult] = await connection.query(list_query, params);
-
-    return [listResult];
-};
-
 //user_id로 유서 가져오기 (내 유서보기)
 export const select_userid_Letter = async (connection, params) => {
     const show_query = `SELECT title,content,createdAt,isShare FROM Letter WHERE user_id = ? `;
