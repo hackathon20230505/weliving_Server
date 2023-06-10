@@ -5,7 +5,6 @@ import { signin } from "./signin.js";
 import { signup } from "./signup.js";
 import { kakao, birth } from "./kakao.js";
 import { sendmessage } from "./sendmessage.js";
-import { authJWT } from "../../utils/auth.js";
 import { verifyMessage } from "./verifymessage.js";
 
 export const router = express.Router();

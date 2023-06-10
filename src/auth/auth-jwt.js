@@ -13,7 +13,7 @@ export const sign = (user) => {
 
   return jwt.sign(payload, process.env.JWT_SECRET, {
     algorithm: 'HS256',
-    expiresIn: '10s',
+    expiresIn: '1h',
     issuer: 'well-dying',
   });
 };

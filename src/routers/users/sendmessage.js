@@ -37,12 +37,17 @@ export const sendmessage = async(req,res) => {
 try {
     const { phoneNumber } = req.body;
 
-    Cache.del(phoneNumber);
+    const formattedPhoneNumber = phoneNumber.replace(/-/g, '');
+    console.log(formattedPhoneNumber);
+    console.log(typeof(formattedPhoneNumber));
+
+
+    Cache.del(formattedPhoneNumber);
 
     //인증번호 생성
     const verifyCode = Math.floor(Math.random() * (999999 - 100000)) + 100000;
 
-    Cache.put(phoneNumber, verifyCode.toString());
+    Cache.put(formattedPhoneNumber, verifyCode.toString());
 
     axios({
         method: method,
@@ -62,7 +67,7 @@ try {
           content: `[Well-Living] 인증번호 [${verifyCode}]를 입력해주세요.`,
           messages: [
             {
-              to: `${phoneNumber}`,
+              to: `${formattedPhoneNumber}`,
             },
           ],
         }, 

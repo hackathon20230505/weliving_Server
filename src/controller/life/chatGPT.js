@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 config();
-
 import { Configuration, OpenAIApi } from 'openai';
+
 
 const openai = new OpenAIApi(new Configuration({
     apiKey: process.env.GPT_KEY
@@ -16,7 +16,7 @@ export const response =  async (req, res) => {
         messages: [
           {
             "role": "system",
-            "content": "I'll give you a suicide note with a person's life now If there's a name in the suicide note, please answer by mentioning the name of the person Read the suicide note carefully and tell the person who wrote the suicide note that he/she has lived well, such as courageous words, hopeful words, and well. So answer carefully (except for the word suicide) The answer must be in Korean",
+            "content": "Read what you see and say something that can give courage and strength in a kind way. In Korean, more than 100 letters",
           },
           {
             "role": "user",

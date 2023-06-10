@@ -48,7 +48,7 @@ export const router = express.Router();
  *               
  */
 //POST /life/letter/create
-router.post('/create', authJWT, letter_create);
+router.post('/create',authJWT,letter_create);
 
 /**
  * @swagger
@@ -101,7 +101,7 @@ router.post('/create', authJWT, letter_create);
  *               
  */
 //GET /life/letter/list
-router.get('/list', letter_list);
+router.get('/list/:birth', letter_list);
 
 /**
  * @swagger
