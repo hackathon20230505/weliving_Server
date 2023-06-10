@@ -66,7 +66,7 @@ export const templist = async (req, res) => {
 // 임시저장 유서 보기 (req==user_id)
 export const tempshow = async (req, res) => {
     // db
-    const { letter_id } = req.body;
+    const { letter_id } = req.params.letter_id;
 
     // execute & respond
     let conn;

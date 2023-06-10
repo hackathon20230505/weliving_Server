@@ -75,7 +75,7 @@ export const memory_show = async (req, res) => {
 // 다른 사람 유서 보기 (req==letter_id)
 export const memory_othershow = async (req, res) => {
     // params
-    const { letter_id } = req.body;
+    const { letter_id } = req.params.letter_id;
 
     // execute & respond
     let conn;
