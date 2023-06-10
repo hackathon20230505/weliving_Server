@@ -25,16 +25,23 @@ export const signInKakao = async (kakaoToken) => {
 
     //DB 사용자가 있는지 확인
     const exist_query = `SELECT email FROM User WHERE email=?`;
-    const conn = await pool.getConnection();
-    const [user] = await conn.query(exist_query, params);
+    let conn;
+    try {
+        conn = await pool.getConnection();
+        const [user] = await conn.query(exist_query, params);
 
-    //DB 회원가입 & 사용자가 없을 경우
-    const create_query = `INSERT INTO User (email, agreeTime, isSocial) VALUES (?,?,'1')`;
-    if (!user[0]) {
-        await conn.query(create_query, params);
+        //DB 회원가입 & 사용자가 없을 경우
+        const create_query = `INSERT INTO User (email, agreeTime, isSocial) VALUES (?,?,'1')`;
+        if (!user[0]) {
+            await conn.query(create_query, params);
+        }
+
+        return [jwt.sign({ email: email }, process.env.JWT_SECRET),email];
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release();
     }
-
-    return [jwt.sign({ email: email }, process.env.JWT_SECRET),email];
 
 };
 

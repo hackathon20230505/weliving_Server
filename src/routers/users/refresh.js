@@ -1,8 +1,5 @@
-import { sign } from "../../auth/auth-jwt.js";
-import { verify } from "../../auth/auth-jwt.js";
-import { refreshVerify } from "../../auth/auth-jwt.js";
+import {refreshVerify, sign, verify} from "../../auth/auth-jwt.js";
 import jwt from "jsonwebtoken"
-
 
 
 export const refresh = async (req, res) => {
@@ -16,6 +13,8 @@ export const refresh = async (req, res) => {
 
     // access token 디코딩하여 user의 정보를 가져옵니다.
     const decoded = jwt.decode(authToken);
+    let user = {};
+    user["user_id"] = decoded.id;
 
     // 디코딩 결과가 없으면 권한이 없음을 응답.
     if (decoded === null) {
@@ -27,8 +26,7 @@ export const refresh = async (req, res) => {
 
     /* access token의 decoding 된 값에서
       유저의 id를 가져와 refresh token을 검증합니다. */
-  const refreshResult = refreshVerify(refreshToken, decoded.id);
-
+    const refreshResult = refreshVerify(refreshToken, decoded.id);
 
     // 재발급을 위해서는 access token이 만료되어 있어야합니다.
     if (authResult.ok === false && authResult.message === 'jwt expired') {

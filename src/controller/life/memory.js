@@ -7,14 +7,14 @@ dotenv.config();
 export const memory_create = async (req, res) => {
     // params
     let { memory } = req.body;
-    memory=JSON.stringify(memory);
     const user_id = req.id;
 
     const params=[memory,user_id];
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         const [letter_id]=await insert_memory(conn, [params,user_id]);
 
         return res.status(200).send({
@@ -27,6 +27,8 @@ export const memory_create = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 
 };
@@ -37,10 +39,11 @@ export const memory_show = async (req, res) => {
     // params
     const user_id = req.id;
     // const {user_id}=req.body;
-    
+
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         let [data] = await select_userid_Memory(conn,user_id);
 
         if(data[0]===undefined){
@@ -49,12 +52,13 @@ export const memory_show = async (req, res) => {
                 msg: "해당 사용자는 추억 카드를 작성하지 않았습니다."
             })
         }else{
-            data=JSON.parse(data[0].content);
+            const arr = data[0].content.split(',');
 
+            console.log(data);
             return res.status(200).send({
                 ok: true,
-                count : Object.keys(data).length,
-                memory: data
+                count : data.length,
+                memory: arr
             })
         }
 
@@ -63,6 +67,8 @@ export const memory_show = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 };
 
@@ -72,8 +78,9 @@ export const memory_othershow = async (req, res) => {
     const { letter_id } = req.body;
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         let [data] = await select_letterid_Memory(conn,letter_id);
 
         if(data[0]===undefined){
@@ -82,18 +89,21 @@ export const memory_othershow = async (req, res) => {
                 msg: "해당 사용자는 추억 카드를 작성하지 않았습니다."
             })
         }else{
-            data=JSON.parse(data[0].content);
+            const arr = data[0].content.split(',');
+
+            console.log(data);
             return res.status(200).send({
                 ok: true,
-                count : Object.keys(data).length,
-                memory: data
-            }) 
+                count : arr.length,
+                memory: arr
+            })
         }
-        
     } catch (err) {
         res.status(409).send({
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 };

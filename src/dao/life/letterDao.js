@@ -14,6 +14,21 @@ export const select_LetterList = async (connection, params) => {
         SELECT user_id FROM User WHERE birth LIKE '__?%'
     ) 
     AND isShare=1`;
+    const listall_query = `SELECT letter_id,title,createdAt FROM Letter WHERE isShare=1`;
+
+    
+    if(params===6){
+        var [listResult] = await connection.query(listall_query);
+    }else{
+        var [listResult] = await connection.query(list_query, params);
+    }
+
+    return [listResult];
+};
+
+//유서 리스트 조회2
+export const select_LetterList_all = async (connection, params) => {
+    const list_query = `SELECT letter_id,title,createdAt FROM Letter AND isShare=1`;
 
     const [listResult] = await connection.query(list_query, params);
 

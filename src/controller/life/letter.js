@@ -1,6 +1,8 @@
 import pool from "../../config/database.js";
 import { formattedTime } from "../../utils/time.js"
+
 import { insert, select_LetterList, select_userid_Letter, select_letterid_Letter, update_modify_isShare, update_modify_content } from "../../dao/life/letterDao.js"
+
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -8,15 +10,15 @@ dotenv.config();
 export const letter_create = async (req, res) => {
 
     // params
-    const { title, content } = req.body;
+    const { title, content, isShare } = req.body;
     const user_id = req.id;
     const createdAt = formattedTime;
-    const isShare = 1; //true
     const params = [title, content, createdAt, isShare, user_id];
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         await insert(conn, params);
 
         return res.status(200).send({
@@ -26,8 +28,11 @@ export const letter_create = async (req, res) => {
     } catch (err) {
         res.status(409).send({
             ok: false,
-            msg: err.message,
+            msg: err.message
+
         })
+    } finally {
+        if (conn) conn.release();
     }
 
 };
@@ -35,12 +40,13 @@ export const letter_create = async (req, res) => {
 // 최종 유서 리스트
 export const letter_list = async (req, res) => {
     // params
-    const { birth } = req.body;
 
+    let birth = parseInt(req.params.birth);
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         const [data] = await select_LetterList(conn, birth);
 
         return res.status(200).send({
@@ -55,6 +61,8 @@ export const letter_list = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 };
 
@@ -65,8 +73,9 @@ export const letter_show = async (req, res) => {
     const user_id = req.id;
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         const [data] = await select_userid_Letter(conn, user_id);
 
         return res.status(200).send({
@@ -78,6 +87,8 @@ export const letter_show = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 };
 
@@ -87,8 +98,9 @@ export const letter_othershow = async (req, res) => {
     const { letter_id } = req.body;
 
     // execute & respond
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         const [data] = await select_letterid_Letter(conn, letter_id);
 
         return res.status(200).send({
@@ -100,6 +112,8 @@ export const letter_othershow = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+    } finally {
+        if (conn) conn.release();
     }
 };
 
@@ -111,8 +125,11 @@ export const modify_isShare = async (req, res) => {
     const params = [isShare, user_id];
 
     //execute & respond
+
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
+
         await update_modify_isShare(conn, params);
 
         return res.status(200).send({
@@ -123,20 +140,27 @@ export const modify_isShare = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+
+    } finally {
+        if (conn) conn.release();
+
     }
 }
 
 // 유서 내용 수정하기
 export const modify_content = async (req, res) => {
     //params
-    const { title, content} = req.body;
+
+    const { title, content } = req.body;
     const createdAt = formattedTime;
     const user_id = req.id;
     const params = [title, content, createdAt, user_id];
 
     //execute & respond
+
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         await update_modify_content(conn, params);
 
         return res.status(200).send({
@@ -147,5 +171,9 @@ export const modify_content = async (req, res) => {
             ok: false,
             msg: err.message,
         })
+
+    } finally {
+        if (conn) conn.release();
+
     }
 }
