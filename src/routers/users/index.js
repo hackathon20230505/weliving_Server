@@ -6,7 +6,7 @@ import { signup } from "./signup.js";
 import { kakao, birth } from "./kakao.js";
 import { sendmessage } from "./sendmessage.js";
 import { verifyMessage } from "./verifymessage.js";
-
+import { logout } from "./logout.js";
 export const router = express.Router();
 
 
@@ -183,5 +183,7 @@ router.post('/send-message', sendmessage)
 router.post('/verify-message', verifyMessage)
 
 router.post('/birth', birth);
+
+router.post('/logout', logout)
 
 export default router;

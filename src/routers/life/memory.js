@@ -135,6 +135,6 @@ router.get('/show', authJWT, memory_show);
  *               
  */
 //GET /life/memory/othershow
-router.get('/othershow', memory_othershow);
+router.get('/othershow/:letter_id', memory_othershow);
 
 export default router;
