@@ -8,7 +8,7 @@ dotenv.config();
 export const letter_create = async (req, res) => {
 
     // params
-    const { title, content, isShare } = req.body;
+    const { title, content, isShare } = req.body[data];
     const user_id = req.id;
     const createdAt = formattedTime;
     const params = [title, content, createdAt, isShare, user_id];
