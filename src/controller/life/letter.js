@@ -16,8 +16,8 @@ export const letter_create = async (req, res) => {
     // execute & respond
     let conn;
     try {
-        conn = await pool.getConnection();
-        await insert(conn, params);
+        // conn = await pool.getConnection();
+        // await insert(conn, params);
 
         return res.status(200).send({
             ok: true
