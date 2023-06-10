@@ -38,8 +38,7 @@ export const letter_create = async (req, res) => {
 // 최종 유서 리스트
 export const letter_list = async (req, res) => {
     // params
-    const { birth } = req.body;
-
+    let birth = parseInt(req.params.birth);
     // execute & respond
     let conn;
     try {
