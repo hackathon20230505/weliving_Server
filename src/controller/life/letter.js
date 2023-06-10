@@ -9,15 +9,15 @@ export const letter_create = async (req, res) => {
 
     // params
     const { title, content, isShare } = req.body[data];
-    const user_id = req.id;
-    const createdAt = formattedTime;
-    const params = [title, content, createdAt, isShare, user_id];
+        const user_id = req.id;
+        const createdAt = formattedTime;
+        const params = [title, content, createdAt, isShare, user_id];
 
     // execute & respond
     let conn;
     try {
-        // conn = await pool.getConnection();
-        // await insert(conn, params);
+        conn = await pool.getConnection();
+        await insert(conn, params);
 
         return res.status(200).send({
             ok: true
