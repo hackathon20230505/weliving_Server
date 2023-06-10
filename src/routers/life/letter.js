@@ -198,7 +198,7 @@ router.get('/show', authJWT, letter_show);
  *               
  */
 //GET /life/letter/othershow
-router.get('/othershow', letter_othershow);
+router.get('/othershow/:letter_id', letter_othershow);
 
 
 
