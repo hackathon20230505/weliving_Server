@@ -8,7 +8,7 @@ export const kakao = async (req, res) => {
     //테스트용
 
     // const kakaoToken = "tMkAkij8NQGzMuFFGz8E5IMxqANnKHPDVe5yspgMCiolkAAAAYivyIwH";
-    const [accessToken, user_id] = await signInKakao(kakaoToken);
+    const [accessToken, user_id] = await signInKakao(headers);
 
 
     const refreshToken = refresh();
