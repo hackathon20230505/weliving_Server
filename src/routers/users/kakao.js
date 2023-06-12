@@ -1,16 +1,23 @@
 import signInKakao from"../../utils/kakao.js";
 import pool from "../../config/database.js";
+import { refresh } from "../../auth/auth-jwt.js";
 
 export const kakao = async (req, res) => {
     const headers = req.headers["authorization"];
     
     //테스트용
+
     // const kakaoToken = "tMkAkij8NQGzMuFFGz8E5IMxqANnKHPDVe5yspgMCiolkAAAAYivyIwH";
     const [accessToken, user_id] = await signInKakao(kakaoToken);
-    
+
+
+    const refreshToken = refresh();
+
     return res.status(200).send({
         ok: true,
-        accessToken: accessToken
+        accessToken : accessToken,
+        refreshToken : refreshToken,
+        user_id : user_id
     });
 };
 

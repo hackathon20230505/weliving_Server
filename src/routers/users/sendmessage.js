@@ -34,7 +34,7 @@ const signature = hash.toString(CryptoJS.enc.Base64);
 
 
 export const sendmessage = async(req,res) => {
-try {
+
     const { phoneNumber } = req.body;
 
     const formattedPhoneNumber = phoneNumber.replace(/-/g, '');
@@ -72,19 +72,17 @@ try {
           ],
         }, 
         })
-        .then(function (response) {
-            res.status(200).send({
-                ok: true,
-                msg: verifyCode,
-            });
-        })
+        .then(response => {
+          console.log(response.data);
+          res.status(200).send({
+              ok: true,
+              msg: verifyCode,
+          });
+      })
         .catch((err) => {
+          console.log(err);
             res.status(409).send("msg" + err.message);
         });
-    } catch(err) {
-        res.status(409).send({
-            ok: false,
-            msg: err.message,
-        });
+
     }
-}
+

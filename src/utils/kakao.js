@@ -14,7 +14,7 @@ export const signInKakao = async (kakaoToken) => {
             Authorization: `Bearer ${kakaoToken}`,
         }
     })
-
+    
     const { data } = result;
     const email = data.kakao_account.email;
     const createdAt = formattedTime;
@@ -29,7 +29,7 @@ export const signInKakao = async (kakaoToken) => {
     try {
         conn = await pool.getConnection();
         const [user] = await conn.query(exist_query, params);
-
+        
         //DB 회원가입 & 사용자가 없을 경우
         const create_query = `INSERT INTO User (email, agreeTime, isSocial) VALUES (?,?,'1')`;
         if (!user[0]) {

@@ -7,6 +7,11 @@ import { kakao, birth } from "./kakao.js";
 import { sendmessage } from "./sendmessage.js";
 import { verifyMessage } from "./verifymessage.js";
 import { logout } from "./logout.js";
+import { authJWT } from "../../utils/auth.js";
+import { checkLetter } from "./check.js";
+import { checkMemory } from "./check.js";
+
+
 export const router = express.Router();
 
 
@@ -184,6 +189,11 @@ router.post('/verify-message', verifyMessage)
 
 router.post('/birth', birth);
 
+router.get('/checkLetter', authJWT, checkLetter)
+
+router.get('/checkMemory', authJWT, checkMemory)
+
 router.post('/logout', logout)
+
 
 export default router;
