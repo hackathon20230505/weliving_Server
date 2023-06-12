@@ -5,13 +5,12 @@ export const kakao = async (req, res) => {
     const headers = req.headers["authorization"];
     
     //테스트용
-    // const kakaoToken = "OSAXwM9D2AxQK4dNQpM04FY9CKtekbw08jody82aCiolUQAAAYiHi1Kg";
-    const [accessToken,email] = await signInKakao(headers);
+    // const kakaoToken = "tMkAkij8NQGzMuFFGz8E5IMxqANnKHPDVe5yspgMCiolkAAAAYivyIwH";
+    const [accessToken, user_id] = await signInKakao(kakaoToken);
     
     return res.status(200).send({
         ok: true,
-        accessToken: accessToken,
-        email: email
+        accessToken: accessToken
     });
 };
 

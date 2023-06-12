@@ -36,7 +36,10 @@ export const signInKakao = async (kakaoToken) => {
             await conn.query(create_query, params);
         }
 
-        return [jwt.sign({ email: email }, process.env.JWT_SECRET),email];
+        const select_query= `SELECT user_id FROM user WHERE email=?`
+        const user_id=await conn.query(select_query,email);
+
+        return [jwt.sign({ user_id: user_id }, process.env.JWT_SECRET),user_id];
     } catch (err) {
         throw err;
     } finally {
