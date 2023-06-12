@@ -21,11 +21,10 @@ export const kakao = async (req, res) => {
 
 export const birth = async(req,res)=>{
     //query
-    const update_query = `UPDATE User SET Birth = ? WHERE email = ?;`;
-
-    //params
-    const {birth, email}=req.body;
-    const params=[birth,email];
+    const userid = req.id
+    const { birth } = req.body;
+    const update_query = `UPDATE User SET Birth = ? WHERE email = (SELECT email FROM User WHERE user_id = ?);`;
+    const params = [birth, userid];
 
     //execute
     let conn;
@@ -33,7 +32,6 @@ export const birth = async(req,res)=>{
     try {
         conn = await pool.getConnection();
         await conn.query(update_query, params);
-        conn.release();
 
         //성공
         return res.status(200).send({
