@@ -187,7 +187,7 @@ router.post('/send-message', sendmessage)
 
 router.post('/verify-message', verifyMessage)
 
-router.post('/birth', birth);
+router.post('/birth', authJWT , birth);
 
 router.get('/checkLetter', authJWT, checkLetter)
 

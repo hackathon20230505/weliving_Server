@@ -3,20 +3,18 @@ dotenv.config();
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
 
-
-
-
 const date = Date.now().toString();
 const uri = process.env.SENS_SERVICE_ID
 const secretKey = process.env.SENS_SECRET_KEY
 const accessKey = process.env.SENS_ACCESS_KEY
 const method = 'POST';
+const finErrCode = 404;
 const space = " ";
 const newLine = "\n";
 const url = `https://sens.apigw.ntruss.com/sms/v2/services/${uri}/messages`;
 const url2 = `/sms/v2/services/${uri}/messages`;
 
-const  hmac = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA256, secretKey);
+const hmac = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA256, secretKey);
 
 hmac.update(method);
 hmac.update(space);
@@ -36,8 +34,7 @@ export const sendmessage = async(req,res) => {
 
     const { phoneNumber } = req.body;
 
-    let formattedPhoneNumber = phoneNumber.replace(/-/g, '');
-    formattedPhoneNumber = parseInt(formattedPhoneNumber);
+    let formattedPhoneNumber = String(phoneNumber.replace(/-/g, ''));
 
 
     console.log(formattedPhoneNumber);
@@ -53,7 +50,7 @@ export const sendmessage = async(req,res) => {
         json: true,
         url: url,
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json; charset=utf-8',
           'x-ncp-iam-access-key': accessKey,
           'x-ncp-apigw-timestamp': date,
           'x-ncp-apigw-signature-v2': signature,
@@ -70,18 +67,12 @@ export const sendmessage = async(req,res) => {
             },
           ],
         }, 
-        })
-        .then(response => {
-          console.log(response.data);
-          res.status(200).send({
-              ok: true,
-              msg: verifyCode,
-          });
-      })
-        .catch((err) => {
+      }).then(res => {
+        console.log(res.data);
+    })
+        .catch(err => {
             console.log(err);
-            res.status(409).send("msg" + err.message);
-        });
+        })
+}
 
-    }
 
