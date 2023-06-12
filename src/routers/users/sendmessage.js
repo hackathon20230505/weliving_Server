@@ -2,7 +2,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
-import Cache from "memory-cache";
 
 
 
@@ -37,17 +36,17 @@ export const sendmessage = async(req,res) => {
 
     const { phoneNumber } = req.body;
 
-    const formattedPhoneNumber = phoneNumber.replace(/-/g, '');
+    let formattedPhoneNumber = phoneNumber.replace(/-/g, '');
+    formattedPhoneNumber = parseInt(formattedPhoneNumber);
+
+
     console.log(formattedPhoneNumber);
     console.log(typeof(formattedPhoneNumber));
 
 
-    Cache.del(formattedPhoneNumber);
-
     //인증번호 생성
     const verifyCode = Math.floor(Math.random() * (999999 - 100000)) + 100000;
 
-    Cache.put(formattedPhoneNumber, verifyCode.toString());
 
     axios({
         method: method,
@@ -80,7 +79,7 @@ export const sendmessage = async(req,res) => {
           });
       })
         .catch((err) => {
-          console.log(err);
+            console.log(err);
             res.status(409).send("msg" + err.message);
         });
 
