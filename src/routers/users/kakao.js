@@ -7,8 +7,8 @@ export const kakao = async (req, res) => {
     
     //테스트용
 
-    // const kakaoToken = "tMkAkij8NQGzMuFFGz8E5IMxqANnKHPDVe5yspgMCiolkAAAAYivyIwH";
-    const [accessToken, user_id] = await signInKakao(headers);
+    // const headers = "MjLPiLQ1UUK0C8XaSlPF6nx6LxyH7W6eoXUMm_KWCj1z6wAAAYiv2GH5";
+    const [accessToken] = await signInKakao(headers);
 
 
     const refreshToken = refresh();
@@ -16,8 +16,7 @@ export const kakao = async (req, res) => {
     return res.status(200).send({
         ok: true,
         accessToken : accessToken,
-        refreshToken : refreshToken,
-        user_id : user_id
+        refreshToken : refreshToken
     });
 };
 
