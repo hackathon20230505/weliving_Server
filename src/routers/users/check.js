@@ -18,7 +18,8 @@ export const checkMemory = async(req,res) => {
             return res.status(200).send({ existsInMemory : 1 });
           } else {
             return res.status(200).send({ existsInMemory : 0 });
-          }
+          
+        }
 
 
     } catch (err) {
