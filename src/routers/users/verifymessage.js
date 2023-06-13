@@ -5,19 +5,17 @@ export const verifyMessage = async(req,res) => {
 
 try {
     
-    const { phoneNumber } = req.body;
-    const formattedPhoneNumber = phoneNumber.replace(/-/g, '');
-    const { verifyCode } = req.body;
+    let { phoneNumber } = req.body;
+    let formattedPhoneNumber = phoneNumber.replace(/-/g, '');
+    const { verifyCode } = req.body;    
 
     const CacheData = Cache.get(formattedPhoneNumber);
-    
-    
-    if (!formattedPhoneNumber) {
+
+    if (!CacheData) {
         return res.json(" msg: 핸드폰 번호를 입력해주세요. ");
       } else if (CacheData !== verifyCode) {
           return res.json(" msg : 입력하신 인증번호와 일치하지 않습니다. ");
       } else {
-        Cache.del(formattedPhoneNumber);
         return res.status(200).send({
             ok: true,
             msg: " 인증이 완료되었습니다. ",
