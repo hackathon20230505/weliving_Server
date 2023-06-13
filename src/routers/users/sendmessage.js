@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import axios from 'axios';
-import  Cache from 'memory-cache';
+import Axios from 'axios';
+import Cache from 'memory-cache';
 import CryptoJS from 'crypto-js';
 
 const date = Date.now().toString();
@@ -9,7 +9,6 @@ const uri = process.env.SENS_SERVICE_ID
 const secretKey = process.env.SENS_SECRET_KEY
 const accessKey = process.env.SENS_ACCESS_KEY
 const method = 'POST';
-const finErrCode = 404;
 const space = " ";
 const newLine = "\n";
 const url = `https://sens.apigw.ntruss.com/sms/v2/services/${uri}/messages`;
@@ -43,12 +42,13 @@ export const sendmessage = async(req,res) => {
     console.log(typeof(formattedPhoneNumber));
 
 
-    //인증번호 생성
     const verifyCode = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+    console.log(verifyCode);
 
     Cache.put(formattedPhoneNumber, verifyCode.toString());
 
-    axios({
+  try {
+    Axios({
         method: method,
         json: true,
         url: url,
@@ -70,12 +70,13 @@ export const sendmessage = async(req,res) => {
             },
           ],
         }, 
-      }).then(res => {
-        console.log(res.data);
-    })
-        .catch(err => {
-          console.log(err);
-        })
+      })
+      return res.send('인증번호 요청 성공')
+  } catch(e) {
+    Cache.del(formattedPhoneNumber);
+    throw e;
+
+  }
 }
 
 
