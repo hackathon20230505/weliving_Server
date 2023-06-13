@@ -9,7 +9,7 @@ export const signup = async (req, res) => {
     try {
         conn = await pool.getConnection();
 
-        const { email, Birth } = req.body;
+        const { email, birth } = req.body;
         let { password } = req.body;
 
         const checkUser = `SELECT email FROM User WHERE email=?;`;
@@ -26,7 +26,7 @@ export const signup = async (req, res) => {
             password = hashedPassword;
 
             const sql = `INSERT INTO User (email, password, birth, agreeTime) VALUES (?,?,?,?);`;
-            const [newUser] = await conn.query(sql, [email, password, Birth, formattedTime]);
+            const [newUser] = await conn.query(sql, [email, password, birth, formattedTime]);
 
             const token = sign(newUser);
 
