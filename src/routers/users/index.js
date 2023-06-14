@@ -8,9 +8,8 @@ import { sendmessage } from "./sendmessage.js";
 import { verifyMessage } from "./verifymessage.js";
 import { logout } from "./logout.js";
 import { authJWT } from "../../utils/auth.js";
-import { checkLetter } from "./check.js";
-import { checkMemory } from "./check.js";
-
+import { checkLetter,checkMemory } from "./check.js";
+import { getemail } from "./returnemail.js";
 
 export const router = express.Router();
 
@@ -181,19 +180,25 @@ router.post('/refresh', refresh);
  *               accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNzQzMjMsImV4cCI6MTY4NTA3NDYyMywiaXNzIjoid2VsbC1keWluZyJ9.usr6JgprDoF1fd-jnmff4KZnuNsiN2Cn_rNVRRsqajA"
  *               email: "lora3226@naver.com"
  */
+
+//POST /api/user/kakao
 router.post('/kakao', kakao);
 
-router.post('/send-message', sendmessage)
+router.post('/send-message', sendmessage);
 
-router.post('/verify-message', verifyMessage)
+router.post('/verify-message', verifyMessage);
 
 router.post('/birth', authJWT , birth);
 
-router.get('/checkLetter', authJWT, checkLetter)
+router.get('/checkLetter', authJWT, checkLetter);
 
-router.get('/checkMemory', authJWT, checkMemory)
+router.get('/checkMemory', authJWT, checkMemory);
 
-router.post('/logout', logout)
+router.post('/logout', logout);
+
+//GET /api/user/getemail
+router.get('/getemail',getemail);
+
 
 
 export default router;
