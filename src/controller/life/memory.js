@@ -16,11 +16,10 @@ export const memory_create = async (req, res) => {
     let conn;
     try {
         conn = await pool.getConnection();
-        const [letter_id]=await insert_memory(conn, [params,user_id]);
+        await insert_memory(conn, [params,user_id]);
 
         return res.status(200).send({
-            ok: true,
-            letter_id: letter_id
+            ok: true
         })
 
     } catch (err) {
