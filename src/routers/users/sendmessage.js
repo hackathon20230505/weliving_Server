@@ -1,82 +1,49 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import Axios from 'axios';
-import Cache from 'memory-cache';
-import CryptoJS from 'crypto-js';
+import aligoapi from "aligoapi"
+import  Cache  from 'memory-cache';
 
-const date = Date.now().toString();
-const uri = process.env.SENS_SERVICE_ID
-const secretKey = process.env.SENS_SECRET_KEY
-const accessKey = process.env.SENS_ACCESS_KEY
-const method = 'POST';
-const space = " ";
-const newLine = "\n";
-const url = `https://sens.apigw.ntruss.com/sms/v2/services/${uri}/messages`;
-const url2 = `/sms/v2/services/${uri}/messages`;
+var AuthData = {
 
-const hmac = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA256, secretKey);
-
-hmac.update(method);
-hmac.update(space);
-hmac.update(url2);
-hmac.update(newLine);
-hmac.update(date);
-hmac.update(newLine);
-hmac.update(accessKey);
-
-const hash = hmac.finalize();
-
-const signature = hash.toString(CryptoJS.enc.Base64);
-
-
-
-export const sendmessage = async(req,res) => {
-
-    const { phoneNumber } = req.body;
-
-    let formattedPhoneNumber = String(phoneNumber.replace(/-/g, ''));
-
-    Cache.del(formattedPhoneNumber);
-
-    console.log(formattedPhoneNumber);
-    console.log(typeof(formattedPhoneNumber));
-
-
-    const verifyCode = Math.floor(Math.random() * (999999 - 100000)) + 100000;
-    console.log(verifyCode);
-
-    Cache.put(formattedPhoneNumber, verifyCode.toString());
-
-  try {
-    Axios({
-        method: method,
-        json: true,
-        url: url,
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-          'x-ncp-iam-access-key': accessKey,
-          'x-ncp-apigw-timestamp': date,
-          'x-ncp-apigw-signature-v2': signature,
-        },
-        data: {
-          type: 'SMS',
-          contentType: 'COMM',
-          countryCode: '82',
-          from: '01040299389',
-          content: `[Well-Living] 인증번호 [${verifyCode}]를 입력해주세요.`,
-          messages: [
-            {
-              to: `${formattedPhoneNumber}`,
-            },
-          ],
-        }, 
-      })
-      return res.send('인증번호 요청 성공')
-  } catch(e) {
-    Cache.del(formattedPhoneNumber);
-    throw e;
-
-  }
+	// (알리고셋팅 - 발급키)
+    key: 'ugowt50ts7lw7n19lpc6vitrsgnumqol',
+    
+    // (알리고셋팅 - IdenTifier)
+    user_id: 'cowardlion',
 }
 
 
+export const sendmessage = async (req, res) => {
+
+  var result = false;
+
+  const phoneNumber = req.body.phoneNumber; // phoneNumber 값을 받아옴
+  Cache.del(phoneNumber);
+
+
+  const authenticationCode = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+  Cache.put(phoneNumber, authenticationCode.toString());
+  
+  req.body = {
+      /*** 필수값입니다 START ***/
+      sender: '01026509997', // (최대 16bytes) 발신번호(알리고셋팅에서 설정한 발신번호)
+      receiver: `${phoneNumber}`, // 컴마()분기 입력으로 최대 1천명
+      msg: `[Well-Living] SMS 인증번호 [${authenticationCode}] 를 입력해주세요 `	// (1~2,000Byte)
+      /*** 필수값입니다 END ***/
+      //   msg_type: SMS(단문), LMS(장문), MMS(그림문자)
+      //   title: 문자제목(LMS, MMS만 허용) // (1~44Byte)
+      //   destination: %고객명% 치환용 입력
+      //   rdate: 예약일(현재일이상) // YYYYMMDD
+      //   rtime: 예약시간-현재시간기준 10분이후 // HHMM
+      //   image: 첨부이미지 // JPEG, PNG, GIF
+  }
+  // req.body 요청값 예시입니다.
+
+  await aligoapi.send(req, AuthData)
+  .then((r) => {
+    res.send(r)
+  })
+  .catch((e) => {
+    res.send(e)
+  })
+}
