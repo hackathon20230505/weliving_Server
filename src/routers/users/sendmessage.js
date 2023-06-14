@@ -6,10 +6,10 @@ import  Cache  from 'memory-cache';
 var AuthData = {
 
 	// (알리고셋팅 - 발급키)
-    key: 'ugowt50ts7lw7n19lpc6vitrsgnumqol',
+    key: process.env.ALIGO_API_KEY,
     
     // (알리고셋팅 - IdenTifier)
-    user_id: 'cowardlion',
+    user_id: process.env.ALIGO_USER_ID,
 }
 
 
@@ -26,7 +26,7 @@ export const sendmessage = async (req, res) => {
   
   req.body = {
       /*** 필수값입니다 START ***/
-      sender: '01026509997', // (최대 16bytes) 발신번호(알리고셋팅에서 설정한 발신번호)
+      sender: process.env.ALIGO_SENDER, // (최대 16bytes) 발신번호(알리고셋팅에서 설정한 발신번호)
       receiver: `${phoneNumber}`, // 컴마()분기 입력으로 최대 1천명
       msg: `[Well-Living] SMS 인증번호 [${authenticationCode}] 를 입력해주세요 `	// (1~2,000Byte)
       /*** 필수값입니다 END ***/
@@ -47,3 +47,4 @@ export const sendmessage = async (req, res) => {
     res.send(e)
   })
 }
+
