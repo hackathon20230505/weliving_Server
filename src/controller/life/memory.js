@@ -11,6 +11,7 @@ export const memory_create = async (req, res) => {
 
     const params=[memory,user_id];
 
+    console.log(user_id);
     // execute & respond
     let conn;
     try {

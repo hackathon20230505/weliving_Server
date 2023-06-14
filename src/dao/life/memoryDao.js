@@ -1,21 +1,15 @@
 //추억 카드 작성
 export const insert_memory = async (connection, params) => {
-    const create_query = `INSERT INTO Memory (content, user_id,letter_id) VALUES (?, ?,?)`;
-    const letter_query = `SELECT letter_id FROM Letter WHERE user_id=?`;
-
-    const [res] = await connection.query(letter_query, params[1]);
-
-
+    const create_query = `INSERT INTO Memory (content, user_id) VALUES (?, ?)`;
 
     let create_param=[];
     create_param.push(params[0][0].toString());
     create_param.push(params[0][1]);
-    create_param.push(res[0].letter_id);
 
     console.log(create_param);
     await connection.query(create_query, create_param);
 
-    return [res[0].letter_id];
+    return;
 };
 
 //user_id로 추억 카드 가져오기 (내 추억 카드 보기)

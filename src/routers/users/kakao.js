@@ -10,13 +10,9 @@ export const kakao = async (req, res) => {
     // const headers = "kBiNTtwQXqPLrR3-BLmmHjLMJPHqh6apnun8CEJFCj102wAAAYi6bEhx";
     const [accessToken] = await signInKakao(headers);
 
-
-    const refreshToken = refresh();
-
     return res.status(200).send({
         ok: true,
         accessToken : accessToken,
-        refreshToken : refreshToken
     });
 };
 
