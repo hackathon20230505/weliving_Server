@@ -1,5 +1,4 @@
 import express from "express";
-
 import refresh from "./refresh.js";
 import { signin } from "./signin.js";
 import { signup } from "./signup.js";
@@ -10,6 +9,7 @@ import { logout } from "./logout.js";
 import { authJWT } from "../../utils/auth.js";
 import { checkLetter,checkMemory } from "./check.js";
 import { getemail } from "./returnemail.js";
+import { changepwd } from "./changepwd.js";
 
 export const router = express.Router();
 
@@ -197,7 +197,10 @@ router.get('/checkMemory', authJWT, checkMemory);
 router.post('/logout', logout);
 
 //GET /api/user/getemail
-router.get('/getemail',getemail);
+router.get('/getemail', authJWT ,getemail);
+
+//POST /api/user/changepwd
+router.post('/changepwd', authJWT, changepwd);
 
 
 

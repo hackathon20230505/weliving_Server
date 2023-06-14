@@ -1,5 +1,5 @@
 import pool from "../../config/database.js";
-import {sign, refresh } from "../../auth/auth-jwt.js";
+import { sign, refresh } from "../../auth/auth-jwt.js";
 import bcrypt from "bcrypt";
 import { redisClient } from "../../utils/cache.js";
 
