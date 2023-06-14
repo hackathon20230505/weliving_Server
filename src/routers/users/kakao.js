@@ -7,7 +7,7 @@ export const kakao = async (req, res) => {
     
     //테스트용
 
-    // const headers = "MjLPiLQ1UUK0C8XaSlPF6nx6LxyH7W6eoXUMm_KWCj1z6wAAAYiv2GH5";
+    // const headers = "kBiNTtwQXqPLrR3-BLmmHjLMJPHqh6apnun8CEJFCj102wAAAYi6bEhx";
     const [accessToken] = await signInKakao(headers);
 
 
