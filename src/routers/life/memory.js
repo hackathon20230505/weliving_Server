@@ -26,7 +26,6 @@ export const router = express.Router();
  *                 type: array
  *                 description: ["추억 1","추억 2"]
  *           example:
- *              "user_id": "(jwt token)"
  *              "memory": ["추억1","추억2","추억3"]
  *       
  *     responses:
