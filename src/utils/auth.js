@@ -6,7 +6,6 @@ export const authJWT = (req, res, next) => {
       const token = req.headers.authorization.split('Bearer ')[1];
 
       const result = verify(token);
-
       if (result.ok) {
         req.id = result.id;
         req.role = result.role;

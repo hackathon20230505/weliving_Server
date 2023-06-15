@@ -13,6 +13,8 @@ export const router = express.Router();
  *     tags: [letter]
  *     summary: 유서 작성 API
  *     description: 유서 작성을 위한 API입니다. 유서 제목 / 유서 내용 / 사용자 id를 받아서 새로운 유서를 생성합니다.
+ *     security:
+ *       - Bearer: []
  *     requestBody:
  *       required: true
  *       content:
@@ -29,9 +31,6 @@ export const router = express.Router();
  *               isShare:
  *                 type: int
  *                 description: 1==공개, 0==비공개
- *               user_id:
- *                 type: int
- *                 description : "사용자 id가 들어있는 jwt 토큰"
  *       
  *     responses:
  *       '200':
@@ -53,23 +52,17 @@ router.post('/create',authJWT,letter_create);
 /**
  * @swagger
  * 
- * /life/letter/list:
+ * /life/letter/list/{birth}:
  *   get:
  *     tags: [letter]
  *     summary: 유서 리스트 조회 API
  *     description: 나이대에 해당하는 여러 유서에 대한 데이터를 받는 API입니다. 유서에 대한 데이터는 유서 제목과 그에 해당하는 유서 id, 만들어진 날짜로 구성되어있습니다. 조회하고 싶은 년대를 request body에 넣어주세요. 
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *          schema:
- *             type: object
- *             properties:
- *               birth:
- *                 type: int
- *                 description: "조회하고자 하는 년도, 80년생 - 8, 90년생 - 9, 00년생 - 0, 10년생 - 1"
- *          example:
- *              "birth" : 9
+ *     parameters:
+ *       - in: path
+ *         name: birth
+ *         required: true
+ *         scheme:
+ *           type: integer
  *       
  *     responses:
  *       '200':
@@ -111,18 +104,8 @@ router.get('/list/:birth', letter_list);
  *     tags: [letter]
  *     summary: 내 유서 조회 API
  *     description: 자신의 유서를 조회할 때 사용하는 API입니다. user_id(int)를 jwt token으로 보내주세요.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *          schema:
- *             type: object
- *             properties:
- *               user_id:
- *                 type: int
- *                 description: jwt token으로 보내주세요.
- *          example:
- *              "user_id" : 1
+ *     security:
+ *       - Bearer: []
  *       
  *     responses:
  *       '200':
@@ -156,23 +139,17 @@ router.get('/show', authJWT, letter_show);
 /**
  * @swagger
  * 
- * /life/letter/othershow:
+ * /life/letter/othershow/{letter_id}:
  *   get:
  *     tags: [letter]
  *     summary: 다른 사람 유서 조회 API
  *     description: 유서 리스트 조회 후, 다른 사람 유서를 조회할 때 사용하는 API입니다. letter_id를 request body에 넣어주세요.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *          schema:
- *             type: object
- *             properties:
- *               letter_id:
- *                 type: int
- *                 description: 유서 리스트 조회하기 API에서 받은 letter_id와 동일합니다.
- *          example:
- *              "letter_id" : 15
+ *     parameters:
+ *       - in: path
+ *         name: letter_id
+ *         required: true
+ *         scheme:
+ *           type: integer     
  *       
  *     responses:
  *       '200':
@@ -245,6 +222,8 @@ router.post('/generate-response', response);
  *     tags: [letter]
  *     summary: 유서 공개/비공개 수정 API
  *     description: 공개/비공개 수정을 위한 API입니다. isShare = 1일 경우 공개, 0일 경우 비공개입니다. 
+ *     security:
+ *       - Bearer: []
  *     requestBody:
  *       required: true
  *       content:
@@ -255,9 +234,6 @@ router.post('/generate-response', response);
  *               isShare:
  *                 type: int
  *                 description: "공개 : 1, 비공개 : 0"
- *               user_id:
- *                 type: int
- *                 description : "사용자 id가 들어있는 jwt 토큰"
  *       
  *     responses:
  *       '200':
@@ -284,6 +260,8 @@ router.post('/modify-isShare',authJWT, modify_isShare);
  *     tags: [letter]
  *     summary: 유서 수정 API
  *     description: 유서 내용을 바꾸는 API입니다. request는 유서 제목, 내용입니다. 
+ *     security:
+ *       - Bearer: []
  *     requestBody:
  *       required: true
  *       content:
@@ -295,9 +273,6 @@ router.post('/modify-isShare',authJWT, modify_isShare);
  *                 type: string
  *               content:
  *                 type: string
- *               user_id:
- *                 type: int
- *                 description : "사용자 id가 들어있는 jwt 토큰"
  *       
  *     responses:
  *       '200':

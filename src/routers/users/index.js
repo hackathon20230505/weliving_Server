@@ -9,7 +9,7 @@ import { logout } from "./logout.js";
 import { authJWT } from "../../utils/auth.js";
 import { checkLetter,checkMemory } from "./check.js";
 import { getemail } from "./returnemail.js";
-import { changepwd } from "./changepwd.js";
+import { changepwd, checktwd } from "./changepwd.js";
 
 export const router = express.Router();
 
@@ -149,7 +149,7 @@ router.post('/refresh', refresh);
 /**
  * @swagger
  * 
- * /users/kakao:
+ * /api/users/kakao:
  *   post:
  *     tags: [Auth API]
  *     summary: 카카오 로그인
@@ -173,21 +173,52 @@ router.post('/refresh', refresh);
  *                   type: boolean
  *                 accessToken:
  *                   type: string
- *                 email:
- *                   type: string
  *             example:
  *               ok: true
  *               accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNzQzMjMsImV4cCI6MTY4NTA3NDYyMywiaXNzIjoid2VsbC1keWluZyJ9.usr6JgprDoF1fd-jnmff4KZnuNsiN2Cn_rNVRRsqajA"
- *               email: "lora3226@naver.com"
  */
-
-//POST /api/user/kakao
+//POST /api/users/kakao
 router.post('/kakao', kakao);
 
 router.post('/send-message', sendmessage);
 
 router.post('/verify-message', verifyMessage);
 
+/**
+ * @swagger
+ * 
+ * /api/users/birth:
+ *   post:
+ *     tags: [Auth API]
+ *     summary: 카카오 로그인 후 태어난 년도 추가 API
+ *     description: 카카오 로그인 후 태어난 년도에 대한 데이터를 받는 API입니다.
+ *     security:
+ *       - Bearer: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               birth:
+ *                 type: string
+ *                 description: "YYYY"
+ *           
+ *     responses:
+ *       '200':
+ *         description: 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *             example:
+ *               ok: true
+ */
+//POST /api/users/birth
 router.post('/birth', authJWT , birth);
 
 router.get('/checkLetter', authJWT, checkLetter);
@@ -196,11 +227,119 @@ router.get('/checkMemory', authJWT, checkMemory);
 
 router.post('/logout', logout);
 
-//GET /api/user/getemail
+/**
+ * @swagger
+ * 
+ * api/users/getemail:
+ *   get:
+ *     tags: [Auth API]
+ *     security:
+ *       - Bearer: []
+ *     summary: 사용자 이메일 받는 API
+ *     description: jwt token으로 사용자의 이메일을 알아내는 API입니다.
+
+ *     responses:
+ *       '200':
+ *         description: 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                 email: 
+ *                   type: string
+ *                   description : 카카오 계정일 경우에 "kakao" 반환
+ *             example:
+ *               ok : true,
+ *               email : lora3226@daum.net
+ */
+//GET /api/users/getemail
 router.get('/getemail', authJWT ,getemail);
 
-//POST /api/user/changepwd
+/**
+ * @swagger
+ * 
+ * api/users/changepwd:
+ *   post:
+ *     tags: [Auth API]
+ *     security:
+ *       - Bearer: []
+ *     summary: 사용자의 비밀번호를 변경하는 API
+ *     description: 개인정보 변경에서 사용자의 비밀번호를 변경하는 API입니다. 
+ * 
+ *     responses:
+ *       '200':
+ *         description: 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                 email: 
+ *                   type: string
+ *             example:
+ *               ok : true,
+ *               email : lora3226@daum.net
+ */
+//POST /api/users/changepwd
 router.post('/changepwd', authJWT, changepwd);
+
+/**
+ * @swagger
+ * 
+ * api/users/checktwd:
+ *   post:
+ *     tags: [Auth API]
+ *     security:
+ *       - Bearer: []
+ *     summary: 사용자의 현재 비밀번호가 맞는지 검사하는 API
+ *     description: 개인정보 변경에서 사용자의 현재 비밀번호가 맞는지 유효성 검사를 진행합니다.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               currentpwd:
+ *                 type: string
+ *          
+ *     responses:
+ *       '200':
+ *         description: 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                 result:
+ *                   type: boolean
+ *             example:
+ *               ok : true 
+ *               result : true
+ *       '401':
+ *          description: 비밀번호 없음
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  ok:
+ *                    type: boolean
+ *                  result:
+ *                    type: boolean
+ *              example:
+ *                ok : true 
+ *                result : false
+ */ 
+//POST /api/users/checktwd
+router.post('/checktwd',authJWT,checktwd);
 
 
 

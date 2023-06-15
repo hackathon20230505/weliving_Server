@@ -9,6 +9,17 @@ export const getemail = async(req,res) => {
 
         conn = await pool.getConnection();
 
+        const kakao_query=`SELECT password FROM User WHERE user_id=?`;
+        
+        const [data]=await conn.query(kakao_query,userID);
+        console.log(data);
+        if(data[0].password==null){
+            res.status(200).send({
+                ok:true,
+                email:"kakao"
+            })
+        }
+
         const sql = `SELECT email FROM User WHERE user_id=? ;`;
         const [email] = await conn.query(sql, [userID]);
 
