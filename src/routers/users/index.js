@@ -268,7 +268,15 @@ router.get('/getemail', authJWT ,getemail);
  *       - Bearer: []
  *     summary: 사용자의 비밀번호를 변경하는 API
  *     description: 개인정보 변경에서 사용자의 비밀번호를 변경하는 API입니다. 
- * 
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               newpwd:
+ *                 type: string
  *     responses:
  *       '200':
  *         description: 성공
@@ -279,11 +287,8 @@ router.get('/getemail', authJWT ,getemail);
  *               properties:
  *                 ok:
  *                   type: boolean
- *                 email: 
- *                   type: string
  *             example:
- *               ok : true,
- *               email : lora3226@daum.net
+ *               ok : true
  */
 //POST /api/users/changepwd
 router.post('/changepwd', authJWT, changepwd);
