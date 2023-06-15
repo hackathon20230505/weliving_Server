@@ -50,4 +50,43 @@ export const changepwd = async (req, res) => {
 
 }
 
-export default changepwd;
+export const checktwd= async (req, res) => {
+    let conn;
+    //request
+    const user_id=req.id;
+    const { currentpwd } = req.body;
+
+    try {
+        //DB
+        conn = await pool.getConnection();
+        const sql = `SELECT user_id, email, password FROM User WHERE user_id=?`;
+        const [data] = await conn.query(sql, [user_id]);
+
+        //비밀번호 비교
+        const user = data[0];
+        const chk = await bcrypt.compare(currentpwd, user.password);
+
+        if (chk) {
+
+            res.status(200).send({
+                ok: true,
+                result : true
+            });
+        } else {
+            res.status(401).send({
+                ok: true,
+                result: false
+            })
+        }
+
+    } catch (err) {
+        res.status(404).send({
+            ok: false,
+            msg: err.message,
+        })
+    } finally {
+        if (conn) conn.release();
+    }
+
+}
+
