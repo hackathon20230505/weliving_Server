@@ -60,7 +60,7 @@ export const checktwd = async (req, res) => {
                 result: true
             });
         } else {
-            res.status(401).send({
+            res.status(200).send({
                 ok: true,
                 result: false
             })
