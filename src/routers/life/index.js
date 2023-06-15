@@ -22,12 +22,6 @@ router.use('/letter', letterRouter);
  */ 
 router.use('/templetter', templetterRouter );
 
-/**
- * @swagger
- * tags:
- *   name: epitaph
- *   description: 묘비명 작성, 보여주기 API
- */
 router.use('/epitaph', epitaphRouter );
 
 /**
