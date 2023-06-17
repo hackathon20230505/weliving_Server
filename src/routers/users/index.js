@@ -7,18 +7,16 @@ import { sendmessage } from "./sendmessage.js";
 import { verifyMessage } from "./verifymessage.js";
 import { logout } from "./logout.js";
 import { authJWT } from "../../utils/auth.js";
-import { checkLetter,checkMemory } from "./check.js";
+import { checkLetter, checkMemory } from "./check.js";
 import { getemail } from "./returnemail.js";
+import { getbirth } from "./returnbirth.js";
 import { changepwd, checktwd } from "./changepwd.js";
 
 export const router = express.Router();
 
-
-
-
 /**
  * @swagger
- * 
+ *
  * /api/users/signup:
  *   post:
  *     tags: [Auth API]
@@ -61,14 +59,11 @@ export const router = express.Router();
  *               data:
  *                 token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNzQzMjMsImV4cCI6MTY4NTA3NDYyMywiaXNzIjoid2VsbC1keWluZyJ9.usr6JgprDoF1fd-jnmff4KZnuNsiN2Cn_rNVRRsqajA"
  */
-router.post('/signup', signup);
-
-
-
+router.post("/signup", signup);
 
 /**
  * @swagger
- * 
+ *
  * /api/users/signin:
  *   post:
  *     tags: [Auth API]
@@ -109,12 +104,11 @@ router.post('/signup', signup);
  *                 accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNzQzMjMsImV4cCI6MTY4NTA3NDYyMywiaXNzIjoid2VsbC1keWluZyJ9.usr6JgprDoF1fd-jnmff4KZnuNsiN2Cn_rNVRRsqajA"
  *                 refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNzg0NTEsImV4cCI6MTY4NTA3OTA1MSwiaXNzIjoid2VsbC1keWluZyJ9.pgfPJwjhYIwslTyo7UcVrP6EMNHVAgc2xZVL81j8dhE"
  */
-router.post('/signin', signin);
-
+router.post("/signin", signin);
 
 /**
  * @swagger
- * 
+ *
  * /api/users/refresh:
  *   post:
  *     tags: [Auth API]
@@ -142,13 +136,11 @@ router.post('/signin', signin);
  *                 accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNzQzMjMsImV4cCI6MTY4NTA3NDYyMywiaXNzIjoid2VsbC1keWluZyJ9.usr6JgprDoF1fd-jnmff4KZnuNsiN2Cn_rNVRRsqajA"
  *                 refreshToken : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNzg0NTEsImV4cCI6MTY4NTA3OTA1MSwiaXNzIjoid2VsbC1keWluZyJ9.pgfPJwjhYIwslTyo7UcVrP6EMNHVAgc2xZVL81j8dhE"
  */
-router.post('/refresh', refresh);
-
-
+router.post("/refresh", refresh);
 
 /**
  * @swagger
- * 
+ *
  * /api/users/kakao:
  *   post:
  *     tags: [Auth API]
@@ -160,7 +152,7 @@ router.post('/refresh', refresh);
  *          required: true
  *          description: 헤더에서 카카오 토큰을 Content-Type을 application/x-www-form-urlencoded로 전송한다. 이때, Key는 authorization, Value는 카카오측에서 받은 토큰으로 한다.
  *          schema:
- *              type: application/x-www-form-urlencoded 
+ *              type: application/x-www-form-urlencoded
  *     responses:
  *       '200':
  *         description: 성공
@@ -178,15 +170,15 @@ router.post('/refresh', refresh);
  *               accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODUwNzQzMjMsImV4cCI6MTY4NTA3NDYyMywiaXNzIjoid2VsbC1keWluZyJ9.usr6JgprDoF1fd-jnmff4KZnuNsiN2Cn_rNVRRsqajA"
  */
 //POST /api/users/kakao
-router.post('/kakao', kakao);
+router.post("/kakao", kakao);
 
-router.post('/send-message', sendmessage);
+router.post("/send-message", sendmessage);
 
-router.post('/verify-message', verifyMessage);
+router.post("/verify-message", verifyMessage);
 
 /**
  * @swagger
- * 
+ *
  * /api/users/birth:
  *   post:
  *     tags: [Auth API]
@@ -204,7 +196,7 @@ router.post('/verify-message', verifyMessage);
  *               birth:
  *                 type: string
  *                 description: "YYYY"
- *           
+ *
  *     responses:
  *       '200':
  *         description: 성공
@@ -219,13 +211,13 @@ router.post('/verify-message', verifyMessage);
  *               ok: true
  */
 //POST /api/users/birth
-router.post('/birth', authJWT , birth);
+router.post("/birth", authJWT, birth);
 
-router.get('/checkLetter', authJWT, checkLetter);
+router.get("/checkLetter", authJWT, checkLetter);
 
-router.get('/checkMemory', authJWT, checkMemory);
+router.get("/checkMemory", authJWT, checkMemory);
 
-router.post('/logout', logout);
+router.post("/logout", logout);
 
 /**
  * @swagger
@@ -252,22 +244,53 @@ router.post('/logout', logout);
  *                   type: string
  *                   description : 카카오 계정일 경우에 "kakao" 반환
  *             example:
- *               ok : true,
+ *               ok : true
  *               email : lora3226@daum.net
  */
 //GET /api/users/getemail
-router.get('/getemail', authJWT ,getemail);
+router.get("/getemail", authJWT, getemail);
 
 /**
  * @swagger
  * 
+ * api/users/getbirth:
+ *   get:
+ *     tags: [Auth API]
+ *     security:
+ *       - Bearer: []
+ *     summary: 사용자 이메일 받는 API
+ *     description: jwt token으로 사용자의 이메일을 알아내는 API입니다.
+
+ *     responses:
+ *       '200':
+ *         description: 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ok:
+ *                   type: boolean
+ *                 birth: 
+ *                   type: string
+ *                   description : 카카오 계정일 경우에 "kakao" 반환
+ *             example:
+ *               ok : true
+ *               birth : 1992
+ */
+//GET /api/users/getbirth
+router.get("/getbirth", authJWT, getbirth);
+
+/**
+ * @swagger
+ *
  * api/users/changepwd:
  *   post:
  *     tags: [Auth API]
  *     security:
  *       - Bearer: []
  *     summary: 사용자의 비밀번호를 변경하는 API
- *     description: 개인정보 변경에서 사용자의 비밀번호를 변경하는 API입니다. 
+ *     description: 개인정보 변경에서 사용자의 비밀번호를 변경하는 API입니다.
  *     requestBody:
  *       required: true
  *       content:
@@ -291,11 +314,11 @@ router.get('/getemail', authJWT ,getemail);
  *               ok : true
  */
 //POST /api/users/changepwd
-router.post('/changepwd', authJWT, changepwd);
+router.post("/changepwd", authJWT, changepwd);
 
 /**
  * @swagger
- * 
+ *
  * api/users/checktwd:
  *   post:
  *     tags: [Auth API]
@@ -312,7 +335,7 @@ router.post('/changepwd', authJWT, changepwd);
  *             properties:
  *               currentpwd:
  *                 type: string
- *          
+ *
  *     responses:
  *       '200':
  *         description: 성공
@@ -326,7 +349,7 @@ router.post('/changepwd', authJWT, changepwd);
  *                 result:
  *                   type: boolean
  *             example:
- *               ok : true 
+ *               ok : true
  *               result : true
  *       '401':
  *          description: 비밀번호 없음
@@ -340,12 +363,10 @@ router.post('/changepwd', authJWT, changepwd);
  *                  result:
  *                    type: boolean
  *              example:
- *                ok : true 
+ *                ok : true
  *                result : false
- */ 
+ */
 //POST /api/users/checktwd
-router.post('/checktwd',authJWT,checktwd);
-
-
+router.post("/checktwd", authJWT, checktwd);
 
 export default router;
