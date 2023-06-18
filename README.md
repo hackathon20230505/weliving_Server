@@ -1,6 +1,7 @@
 # weliving
 
-"당신의 마음은 안녕하신가요?" 사용자의 삶의 정신적/관계적 재산과 마음챙김 글쓰기를 통한 삶의 애착 증대 및 긍정성 도모를 이끄는 서비스 입니다.
+"당신의 마음은 안녕하신가요?" <br>
+삶의 정신적/관계적 재산과 마음챙김 글쓰기를 통한 삶의 애착 증대 및 긍정성 도모를 이끄는 서비스 입니다.
 
 
 > 삶의 애착과 긍정성 도모를 이끄는 마음챙김 글쓰기 서비스  👉 https://welldie.com
@@ -16,6 +17,16 @@
 자신의 인생에서 겪어온 정신적 / 관계적 재산 등을 기록하는 추억카드 작성과 타인에게는 친절하지만 정작 자신에게는 친절하지 않는 현실을 모토로 해 <br>
 자신을 사랑하는 제3자라고 생각해 스스로에게 따뜻한 말과 사랑스러운 말은 던지는 마음챙김 글쓰기를 수행합니다. <br>
 이를 통해 사용자의 감정은 주관적 생각일 뿐, "사실"이 아님을 객관성 인지 향상과 동시에 사용자의 삶의 애착 증대를 목표로 합니다. <br>
+
+## Referecne
+
+자기성찰을 위한 글쓰기: 유서 https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE06613314 <br>
+우울 수준별 자살생각에 영향을 미치는 요인에 관한 연구 https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10556204 <br>
+저널치료 : 새로운 일기쓰기 https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001228132 <br>
+자기자비 글쓰기 프로그램이 대학생의 사회불안에 미치는 영향: 자기비난, 자기개념 명확성, 사회비교경향성을 중심으로 https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002898932 <br>
+집착, 역기능적 문제해결, 마음챙김, 자살생각 간의 관계 https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001292332 <br>
+
+
 
 
 
