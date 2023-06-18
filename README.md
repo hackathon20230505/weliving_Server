@@ -20,11 +20,16 @@
 
 ## Referecne
 
-자기성찰을 위한 글쓰기: 유서 https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE06613314 <br>
-우울 수준별 자살생각에 영향을 미치는 요인에 관한 연구 https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10556204 <br>
-저널치료 : 새로운 일기쓰기 https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001228132 <br>
-자기자비 글쓰기 프로그램이 대학생의 사회불안에 미치는 영향: 자기비난, 자기개념 명확성, 사회비교경향성을 중심으로 https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002898932 <br>
-집착, 역기능적 문제해결, 마음챙김, 자살생각 간의 관계 https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001292332 <br>
+자기성찰을 위한 글쓰기: 유서 <br>
+https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE06613314 <br>
+우울 수준별 자살생각에 영향을 미치는 요인에 관한 연구 <br>
+https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10556204 <br>
+저널치료 : 새로운 일기쓰기 <br>
+https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001228132 <br>
+자기자비 글쓰기 프로그램이 대학생의 사회불안에 미치는 영향: 자기비난, 자기개념 명확성, 사회비교경향성을 중심으로 <br>
+https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002898932 <br>
+집착, 역기능적 문제해결, 마음챙김, 자살생각 간의 관계<br>
+https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001292332 <br>
 
 
 
