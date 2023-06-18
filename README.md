@@ -6,7 +6,7 @@
 
 > 기획서 https://www.miricanvas.com/ko/v/124y97q
 
- <img width="1326" alt="스크린샷 2023-06-18 오후 12 00 34" src="https://github.com/hackathon20230505/weliving_Server/assets/76617139/8992da3e-21d6-4d80-8a19-3150da7a3b00">
+ <img width="1300" alt="스크린샷 2023-06-18 오후 12 00 34" src="https://github.com/hackathon20230505/weliving_Server/assets/76617139/8992da3e-21d6-4d80-8a19-3150da7a3b00">
 
 ## 📖 Description
 <b>"당신의 마음은 안녕하신가요?"</b>
@@ -15,8 +15,6 @@
 자신이 걸어온 인생의 정신적,관계적 재산을 기록하고 스스로의 마음을 챙기는 마음챙김 글쓰기 수행을 통해 <br>
 사용자의 감정은 주관적 생각일 뿐, "사실"이 아니라는 객관적 인지 향상과 동시에 사용자의 삶의 애착 증대를 목표로 합니다. <br>
 
-
-<img width="1398" alt="스크린샷 2023-06-18 오후 12 37 58" src="https://github.com/hackathon20230505/weliving_Server/assets/76617139/fa92b0e7-a545-494b-ad5b-f11a2c67ce8f">
 
 ## ⭐ Main Feature
 
@@ -37,6 +35,8 @@
 - 추억카드, 마음챙김 글 상세 정보 조회 기능
 - 마이페이지 조회 및 수정 기능
 
+<img width="1300" alt="스크린샷 2023-06-18 오후 12 37 58" src="https://github.com/hackathon20230505/weliving_Server/assets/76617139/fa92b0e7-a545-494b-ad5b-f11a2c67ce8f">
+
 
 ## 🔧 Stack
 - **Language**: JavaScript
@@ -44,7 +44,7 @@
 - **Database** : AWS RDS (MariaDB)
 - **Deploy**: AWS EC2, Route53, Docker, PM2
 
-<img width="1291" alt="스크린샷 2023-06-18 오후 12 43 08" src="https://github.com/hackathon20230505/weliving_Server/assets/76617139/9bc9abda-3381-41fe-a893-1e2624ca12d2">
+<img width="1300" alt="스크린샷 2023-06-18 오후 12 43 08" src="https://github.com/hackathon20230505/weliving_Server/assets/76617139/9bc9abda-3381-41fe-a893-1e2624ca12d2">
 
 
 ## 📝 Referecne
