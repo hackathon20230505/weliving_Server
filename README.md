@@ -4,4 +4,6 @@
 
 > 삶의 애착과 긍정성 도모를 이끄는 마음챙김 글쓰기 서비스  👉 https://welldie.com
 
-https://www.miricanvas.com/ko/v/124y97q
+### 기획 PPT https://www.miricanvas.com/ko/v/124y97q
+
+ <img width="1326" alt="스크린샷 2023-06-18 오후 12 00 34" src="https://github.com/hackathon20230505/weliving_Server/assets/76617139/8992da3e-21d6-4d80-8a19-3150da7a3b00">
