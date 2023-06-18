@@ -46,6 +46,22 @@
 
 <img width="1300" alt="스크린샷 2023-06-18 오후 12 43 08" src="https://github.com/hackathon20230505/weliving_Server/assets/76617139/9bc9abda-3381-41fe-a893-1e2624ca12d2">
 
+## :open_file_folder: Project Structure
+
+```markdown
+src
+├── auth
+├── config
+├── controller
+│   ├── types
+├── Dao
+    ├── types
+├── Routers
+     ├── types
+├── swagger
+├── utils
+```
+
 
 ## 📝 Referecne
 
