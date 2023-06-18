@@ -37,6 +37,16 @@
 - 추억카드, 마음챙김 글 상세 정보 조회 기능
 - 마이페이지 조회 및 수정 기능
 
+
+## 🔧 Stack
+- **Language**: JavaScript
+- **Library & Framework** : Node.js
+- **Database** : AWS RDS (MariaDB)
+- **Deploy**: AWS EC2, Route53, Docker, PM2
+
+<img width="1291" alt="스크린샷 2023-06-18 오후 12 43 08" src="https://github.com/hackathon20230505/weliving_Server/assets/76617139/9bc9abda-3381-41fe-a893-1e2624ca12d2">
+
+
 ## 📝 Referecne
 
 자기성찰을 위한 글쓰기: 유서 <br>
