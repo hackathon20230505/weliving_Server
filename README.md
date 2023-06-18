@@ -19,7 +19,29 @@
 자신을 사랑하는 제3자라고 생각해 스스로에게 따뜻한 말과 사랑스러운 말은 던지는 마음챙김 글쓰기를 수행합니다. <br>
 이를 통해 사용자의 감정은 주관적 생각일 뿐, "사실"이 아님을 객관성 인지 향상과 동시에 사용자의 삶의 애착 증대를 목표로 합니다. <br>
 
-## Referecne
+
+<img width="1398" alt="스크린샷 2023-06-18 오후 12 37 58" src="https://github.com/hackathon20230505/weliving_Server/assets/76617139/fa92b0e7-a545-494b-ad5b-f11a2c67ce8f">
+
+## ⭐ Main Feature
+
+### 추억카드 / 마음챙김 글쓰기 작성 기능
+- chatGPT API 를 활용하여 글 내용 기반, 위로/공감의 말 전달
+
+### 공유 기능
+- 사용자간의 감정적 유대 및 사회적 공감 증대 (익명성)
+
+### 문자 인증 기능
+- 서비스 사용 후 사용자 사후 관리 (문자를 통한 에세이, 좋은 글귀, 명상 음악 등 제공)
+- 
+### 로그인 기능
+- 카카오 소셜 로그인
+- JWT 기반의 유저 인증/인가 수행
+
+### 기타 기능
+- 추억카드, 마음챙김 상세 정보 조회 기능
+- 마이페이지 조회 및 수정 기능
+
+## 📝 Referecne
 
 자기성찰을 위한 글쓰기: 유서 <br>
 https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE06613314 <br>
@@ -31,10 +53,3 @@ https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArti
 https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002898932 <br>
 집착, 역기능적 문제해결, 마음챙김, 자살생각 간의 관계<br>
 https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001292332 <br>
-
-
-
-
-
-
-
