@@ -53,7 +53,7 @@ src
 ├── auth
 ├── config
 ├── controller
-│   ├── types
+   ├── types
 ├── Dao
     ├── types
 ├── Routers
