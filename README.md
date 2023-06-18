@@ -62,6 +62,13 @@ src
 ├── utils
 ```
 
+> Swagger Document : http://www.welldie.com:3000/api-docs/
+
+
+## 👨‍👩‍👧‍👦 Developer
+*  **정진철** ([bik1111](https://github.com/bik1111))
+*  **이효림** ([rimi3226](https://github.com/rimi3226))
+
 
 ## 📝 Referecne
 
