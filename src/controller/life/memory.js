@@ -19,8 +19,7 @@ export const memory_create = async (req, res) => {
         await insert_memory(conn, [params,user_id]);
 
         return res.status(200).send({
-            ok: false,
-            msg: "수정된 부분"
+            ok: true
         })
 
     } catch (err) {
