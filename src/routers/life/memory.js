@@ -8,7 +8,7 @@ export const router = express.Router();
 /**
  * @swagger
  * 
- * api/life/memory/create:
+ * /api/life/memory/create:
  *   post:
  *     tags: [memory]
  *     summary: 추억 카드 작성 API
@@ -48,7 +48,7 @@ router.post('/create', authJWT, memory_create);
 /**
  * @swagger
  * 
- * api/life/memory/show:
+ * /api/life/memory/show:
  *   get:
  *     tags: [memory]
  *     security:

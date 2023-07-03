@@ -8,7 +8,7 @@ export const router = express.Router();
 /**
  * @swagger
  * 
- * /life/letter/create:
+ * /api/life/letter/create:
  *   post:
  *     tags: [letter]
  *     summary: 유서 작성 API
@@ -52,7 +52,7 @@ router.post('/create',authJWT,letter_create);
 /**
  * @swagger
  * 
- * /life/letter/list/{birth}:
+ * /api/life/letter/list/{birth}:
  *   get:
  *     tags: [letter]
  *     summary: 유서 리스트 조회 API
@@ -99,7 +99,7 @@ router.get('/list/:birth', letter_list);
 /**
  * @swagger
  * 
- * /life/letter/show:
+ * /api/life/letter/show:
  *   get:
  *     tags: [letter]
  *     summary: 내 유서 조회 API
@@ -139,7 +139,7 @@ router.get('/show', authJWT, letter_show);
 /**
  * @swagger
  * 
- * /life/letter/othershow/{letter_id}:
+ * /api/life/letter/othershow/{letter_id}:
  *   get:
  *     tags: [letter]
  *     summary: 다른 사람 유서 조회 API
@@ -217,7 +217,7 @@ router.post('/generate-response', response);
 /**
  * @swagger
  * 
- * /life/letter/modify-isShare:
+ * /api/life/letter/modify-isShare:
  *   post:
  *     tags: [letter]
  *     summary: 유서 공개/비공개 수정 API
@@ -255,7 +255,7 @@ router.post('/modify-isShare',authJWT, modify_isShare);
 /**
  * @swagger
  * 
- * /life/letter/modify-content:
+ * /api/life/letter/modify-content:
  *   post:
  *     tags: [letter]
  *     summary: 유서 수정 API
