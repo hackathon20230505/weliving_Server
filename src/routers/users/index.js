@@ -1,16 +1,16 @@
 import express from "express";
 import refresh from "./refresh.js";
-import { signin } from "./signin.js";
-import { signup } from "./signup.js";
-import { kakao, birth } from "./kakao.js";
-import { sendmessage } from "./sendmessage.js";
-import { verifyMessage } from "./verifymessage.js";
-import { logout } from "./logout.js";
+import { signin } from "../../controller/user/signin.js";
+import { signup } from "../../controller/user/signup.js";
+import { kakao, birth } from "../../controller/user/kakao.js";
+import { sendmessage } from "../../controller/user/sendmessage.js";
+import { verifyMessage } from "../../controller/user/verifymessage.js";
+import { logout } from "../../controller/user/logout.js";
 import { authJWT } from "../../utils/auth.js";
-import { checkLetter, checkMemory } from "./check.js";
-import { getemail } from "./returnemail.js";
-import { getbirth } from "./returnbirth.js";
-import { changepwd, checktwd } from "./changepwd.js";
+import { checkLetter, checkMemory } from "../../controller/user/check.js";
+import { getemail } from "../../controller/user/returnemail.js";
+import { getbirth } from "../../controller/user/returnbirth.js";
+import { changepwd, checktwd } from "../../controller/user/changepwd.js";
 
 export const router = express.Router();
 
@@ -213,10 +213,13 @@ router.post("/verify-message", verifyMessage);
 //POST /api/users/birth
 router.post("/birth", authJWT, birth);
 
+//GET /api/users/checkLetter
 router.get("/checkLetter", authJWT, checkLetter);
 
+//GET /api/users/checkMemory
 router.get("/checkMemory", authJWT, checkMemory);
 
+//POST /api/users/logout
 router.post("/logout", logout);
 
 /**
