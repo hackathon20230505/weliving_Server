@@ -60,7 +60,7 @@ src
 ├── utils
 ```
 
-> Swagger Document : http://www.welldie.com:3000/api-docs/
+> Swagger Document : http://wliv.kr:3000/api-docs/
 
 
 ## 👨‍👩‍👧‍👦 Developer
